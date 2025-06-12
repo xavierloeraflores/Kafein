@@ -1,13 +1,19 @@
 import Link from "next/link";
-import { Leaf } from "lucide-react";
+import Image from "next/image";
+import { images } from "~/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t bg-white py-6">
-      <div className="container flex flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-6">
+    <footer className="w-full border-t bg-white">
+      <div className="container mx-auto flex min-h-16 flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-6">
         <div className="flex items-center gap-2 text-xl font-bold">
-          <Leaf className="h-6 w-6 text-emerald-600" />
-          <span>Kafein</span>
+          <Image
+            src={images.logos.png[128]}
+            alt="Kafein"
+            width={100}
+            height={100}
+          />
+          <span className="sr-only">Kafein</span>
         </div>
         <p className="text-center text-sm text-gray-500 md:text-left">
           &copy; {new Date().getFullYear()} Kafein. All rights reserved.
