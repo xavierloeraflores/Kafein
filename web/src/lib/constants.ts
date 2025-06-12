@@ -69,3 +69,7 @@ export const products = [
     image: images.strawberry_matcha,
   },
 ];
+
+export const socials = {
+  instagram: "https://www.instagram.com/props_lab/",
+};
