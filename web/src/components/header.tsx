@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import Image from "next/image";
+import { images } from "~/lib/constants";
 
 export default function Header() {
   return (
@@ -9,7 +10,7 @@ export default function Header() {
         <div className="flex items-center gap-2 text-xl font-bold">
           <span className="sr-only">Kafein</span>
           <Image
-            src="/images/Kafein256.png"
+            src={images.logos.png[256]}
             alt="Kafein"
             width={200}
             height={200}
