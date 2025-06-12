@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="w-full border-t bg-white">
       <div className="container mx-auto flex min-h-16 flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-6">
-        <div className="flex items-center gap-2 text-xl font-bold">
+        <Link href="/" className="flex items-center gap-2 text-xl font-bold">
           <Image
             src={images.logos.png[128]}
             alt="Kafein"
@@ -14,7 +14,7 @@ export default function Footer() {
             height={100}
           />
           <span className="sr-only">Kafein</span>
-        </div>
+        </Link>
         <p className="text-center text-sm text-gray-500 md:text-left">
           &copy; {new Date().getFullYear()} Kafein. All rights reserved.
         </p>

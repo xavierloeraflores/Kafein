@@ -7,7 +7,7 @@ export function Header() {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40 w-full border-b backdrop-blur">
       <div className="container mx-auto flex h-20 w-full items-center justify-between space-x-4 sm:space-x-0">
-        <div className="flex items-center gap-2 text-xl font-bold">
+        <Link href="#" className="flex items-center gap-2 text-xl font-bold">
           <span className="sr-only">Kafein</span>
           <Image
             src={images.logos.png[256]}
@@ -15,7 +15,7 @@ export function Header() {
             width={200}
             height={200}
           />
-        </div>
+        </Link>
         <div className="hidden items-center space-x-1 md:flex">
           <nav className="flex items-center space-x-6 text-sm font-medium">
             <Link
@@ -91,7 +91,7 @@ export function SecondaryHeader() {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40 w-full border-b backdrop-blur">
       <div className="container mx-auto flex h-20 w-full items-center justify-between space-x-4 sm:space-x-0">
-        <div className="flex items-center gap-2 text-xl font-bold">
+        <Link href="/" className="flex items-center gap-2 text-xl font-bold">
           <span className="sr-only">Kafein</span>
           <Image
             src={images.logos.png[256]}
@@ -99,7 +99,7 @@ export function SecondaryHeader() {
             width={200}
             height={200}
           />
-        </div>
+        </Link>
         <div className="hidden items-center space-x-1 md:flex">
           <div className="ml-4 flex items-center space-x-1">
             <Button
