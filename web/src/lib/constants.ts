@@ -16,6 +16,9 @@ const logos = {
 export const images = {
   logos,
   hero: "/images/matcha.png",
+  matcha: "/images/matcha.png",
+  banana_matcha: "/images/matcha.png",
+  strawberry_matcha: "/images/matcha.png",
 };
 
 export const testimonials = [
@@ -28,7 +31,7 @@ export const testimonials = [
   {
     name: "Michael R.",
     quote:
-      "Their matcha is amazing. The matcha is always fresh and ready to drink. ",
+      "Their Banana Cream matcha is amazing. The matcha is always fresh and ready to drink. ",
     rating: 5,
   },
   {
@@ -36,5 +39,32 @@ export const testimonials = [
     quote:
       "As a matcha connoisseur, I'm impressed by the quality. You can taste the difference in their ceremonial grade.",
     rating: 5,
+  },
+];
+
+export const products = [
+  {
+    emoji: "🍵",
+    title: "Iced Matcha Latte",
+    price: "$4.95",
+    description:
+      "Our signature iced drink made with ceremonial grade matcha and your choice of silky milk, served over ice for a smooth, refreshing boost.",
+    image: images.matcha,
+  },
+  {
+    emoji: "🍌",
+    title: "Banana Cream Matcha Latte",
+    price: "$5.45",
+    description:
+      "A rich and creamy blend of matcha, banana, and vanilla bean, perfectly balanced for a smooth and naturally sweet latte experience.",
+    image: images.banana_matcha,
+  },
+  {
+    emoji: "🍓",
+    title: "Strawberry & Cream Matcha Latte",
+    price: "$5.95",
+    description:
+      "A luscious fusion of matcha, real strawberries, and velvety cream, creating a fruity and vibrant twist on the classic latte.",
+    image: images.strawberry_matcha,
   },
 ];
