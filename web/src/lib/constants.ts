@@ -19,6 +19,7 @@ export const images = {
   matcha: "/images/matcha.png",
   banana_matcha: "/images/matcha.png",
   strawberry_matcha: "/images/matcha.png",
+  about: logos.jpg[1024],
 };
 
 export const testimonials = [
