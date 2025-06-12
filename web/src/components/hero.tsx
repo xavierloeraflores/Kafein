@@ -30,7 +30,7 @@ export default function Hero() {
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href="/shop">
+                <Link href="/contact">
                   Contact Us
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Link>
