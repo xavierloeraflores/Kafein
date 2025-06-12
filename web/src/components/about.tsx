@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "~/components/ui/button";
 import { images } from "~/lib/constants";
 
 export default function About() {
