@@ -1,7 +1,25 @@
-export default async function Home() {
+import Footer from "~/components/footer";
+import Header from "~/components/header";
+import Hero from "~/components/hero";
+import Benefits from "~/components/benefits";
+import Testimonials from "~/components/testimonials";
+import Products from "~/components/products";
+import About from "~/components/about";
+import Community from "~/components/community";
+
+export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      Hello World
-    </main>
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="flex-1">
+        <Hero />
+        <Benefits />
+        <Products />
+        <Testimonials />
+        <About />
+        <Community />
+      </main>
+      <Footer />
+    </div>
   );
 }
