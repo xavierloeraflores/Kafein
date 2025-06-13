@@ -24,21 +24,23 @@ export default function About() {
                 Our Matcha Story
               </h2>
               <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Founded in 2025, Kafein began with a simple mission: to bring
-                authentic, high-quality matcha to matcha lovers in the Bay Area.
+                Kafein was founded in 2025 after a life-changing trip to Japan.
+                What began as a one-month stay turned into a lasting love for
+                the culture, the people, and most of all—the matcha. After
+                experiencing ceremonial-grade matcha in Uji, we couldn&apos;t
+                forget the taste, the ritual, or the feeling it left us with.
               </p>
             </div>
             <div className="space-y-2">
               <p className="text-gray-500">
-                Our journey started in the lush tea fields of Uji, Japan, where
-                we formed direct relationships with family-owned tea farms that
-                have been perfecting the art of matcha for generations.
+                Inspired by that journey, we returned home with a mission: to
+                bring that same authenticity and quality to the Bay Area.
               </p>
               <p className="text-gray-500">
-                Today, we&apos;re proud to offer ceremonial grade matcha that
-                honors tradition while embracing modern flavors and preparation
-                methods. Every product is crafted with care, sustainability, and
-                a deep respect for matcha&apos;s rich heritage.
+                Today, Kafein proudly serves thoughtfully crafted, small-batch
+                matcha drinks made from premium Uji-sourced green tea. Every cup
+                honors the tradition we fell in love with—while embracing fresh,
+                modern ways to enjoy it.
               </p>
             </div>
           </div>

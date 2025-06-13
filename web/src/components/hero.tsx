@@ -16,10 +16,10 @@ export default function Hero() {
                 <span className="text-emerald-600">Matcha Latte</span>
               </h1>
               <p className="max-w-[600px] text-gray-500 md:text-xl">
-                Sip Kafein. Kafein is a Bay Area matcha shop serving
-                thoughtfully crafted, small-batch matcha drinks using premium
-                Japanese green tea. Refresh, recharge, and reconnect—one sip at
-                a time.
+                Kafein is a San Jose-based matcha shop proudly serving the Bay
+                Area with thoughtfully crafted, small-batch matcha drinks made
+                using premium ceremonial-grade matcha sourced from Uji, Japan.
+                Refresh, recharge, and reconnect—one sip at a time.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">

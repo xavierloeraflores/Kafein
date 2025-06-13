@@ -13,8 +13,9 @@ export default function Benefits() {
               Benefits of Our Matcha
             </h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Our ceremonial grade matcha is carefully sourced from the finest
-              tea farms in Japan, ensuring exceptional quality and taste.
+              Our ceremonial grade matcha is carefully sourced from one of the
+              finest tea farms in Uji, Japan, ensuring exceptional quality and
+              taste.
             </p>
           </div>
         </div>
