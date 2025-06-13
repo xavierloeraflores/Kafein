@@ -26,12 +26,12 @@ export default function About() {
               <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Kafein was founded in 2025 after a life-changing trip to Japan.
                 What began as a one-month stay turned into a lasting love for
-                the culture, the people, and most of all—the matcha. After
-                experiencing ceremonial-grade matcha in Uji, we couldn&apos;t
-                forget the taste, the ritual, or the feeling it left us with.
+                the culture, the people, and most of all—the matcha.
               </p>
             </div>
             <div className="space-y-2">
+              <p className="text-gray-500">After experiencing ceremonial-grade matcha in Uji, we couldn&apos;t forget the taste, the ritual, or the feeling it left us with.
+</p>
               <p className="text-gray-500">
                 Inspired by that journey, we returned home with a mission: to
                 bring that same authenticity and quality to the Bay Area.
