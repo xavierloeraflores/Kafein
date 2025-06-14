@@ -72,6 +72,6 @@ export const products = [
 
 export const socials = {
   instagram: "https://www.instagram.com/kafein.sj",
-  instagram_handle: "@props_lab",
+  instagram_handle: "@kafein.sj",
   email: "sipkafein@gmail.com",
 };
