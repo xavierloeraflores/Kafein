@@ -25,7 +25,8 @@ import {
 } from "~/components/ui/popover";
 import { cn } from "~/lib/utils";
 import { useForm, type AnyFieldApi } from "@tanstack/react-form";
-import { z } from "zod";
+import { api } from "~/trpc/react";
+import { orderSchema } from "~/lib/schemas";
 
 const drinks = [
   {
@@ -60,18 +61,8 @@ const drinks = [
   },
 ];
 
-const formSchema = z.object({
-  fullName: z.string().min(1, "Name is required"),
-  phoneNumber: z.string().min(1, "Phone number is required"),
-  pickupDate: z.date().min(new Date(), "Pickup date must be in the future"),
-  pickupTime: z.string().min(1, "Pickup time is required"),
-  paymentMethod: z.string().min(1, "Payment method is required"),
-  allergies: z.string(),
-  instagramHandle: z.string(),
-  selectedDrinks: z.record(z.string(), z.number()),
-});
-
 export default function OrderForm() {
+  const { mutate: order } = api.order.order.useMutation();
   const form = useForm({
     defaultValues: {
       fullName: "",
@@ -84,11 +75,11 @@ export default function OrderForm() {
       selectedDrinks: {},
     },
     onSubmit: () => {
-      console.log(form.state.values.selectedDrinks);
+      order(form.state.values);
     },
     validators: {
-      onChange: formSchema,
-      onMount: formSchema,
+      onChange: orderSchema,
+      onMount: orderSchema,
     },
   });
   const [selectedDrinks, setSelectedDrinks] = useState<Record<string, number>>(
