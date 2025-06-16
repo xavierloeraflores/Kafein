@@ -27,6 +27,8 @@ import { cn } from "~/lib/utils";
 import { useForm, type AnyFieldApi } from "@tanstack/react-form";
 import { api } from "~/trpc/react";
 import { orderSchema } from "~/lib/schemas";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const drinks = [
   {
@@ -62,7 +64,8 @@ const drinks = [
 ];
 
 export default function OrderForm() {
-  const { mutate: order } = api.order.order.useMutation();
+  const { mutateAsync: order } = api.order.order.useMutation();
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       fullName: "",
@@ -74,8 +77,16 @@ export default function OrderForm() {
       instagramHandle: "",
       selectedDrinks: {},
     },
-    onSubmit: () => {
-      order(form.state.values);
+    onSubmit: async () => {
+      const result = await order(form.state.values);
+      if (result) {
+        toast.success("Order placed successfully");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      } else {
+        toast.error("Failed to place order");
+      }
     },
     validators: {
       onChange: orderSchema,
