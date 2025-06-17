@@ -47,7 +47,7 @@ export const products = [
   {
     emoji: "🍵",
     title: "Iced Matcha Latte",
-    price: "$4.95",
+    price: "$6.50",
     description:
       "Our signature iced drink made with ceremonial grade matcha and your choice of silky milk, served over ice for a smooth, refreshing boost.",
     image: images.matcha,
@@ -55,15 +55,23 @@ export const products = [
   {
     emoji: "🍌",
     title: "Banana Cream Matcha Latte",
-    price: "$5.45",
+    price: "$7.00",
     description:
       "A rich and creamy blend of matcha, banana, and vanilla bean, perfectly balanced for a smooth and naturally sweet latte experience.",
     image: images.banana_matcha,
   },
   {
+    emoji: "🫐",
+    title: "Blueberry Matcha Latte",
+    price: "$7.00",
+    description:
+      "A vibrant blend of ceremonial matcha and our house-made organic blueberry jam, crafted to deliver a rich, fruity latte.",
+    image: images.strawberry_matcha,
+  },
+  {
     emoji: "🍓",
-    title: "Strawberry & Cream Matcha Latte",
-    price: "$5.95",
+    title: "Strawberry Matcha Latte",
+    price: "$7.00",
     description:
       "A luscious fusion of matcha, real strawberries, and velvety cream, creating a fruity and vibrant twist on the classic latte.",
     image: images.strawberry_matcha,
