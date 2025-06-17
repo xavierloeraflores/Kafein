@@ -4,24 +4,22 @@ import FollowUs from "./follow-us";
 
 export default function Contact() {
   return (
-    <main className="flex-1">
-      <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-4">
-        <div className="mx-auto max-w-2xl pt-16">
-          <div className="mb-12 text-center">
-            <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-900">
-              Get in Touch
-            </h1>
-            <p className="mx-auto max-w-md text-lg text-slate-600">
-              We&apos;d love to hear from you. Send us an email or follow us on
-              social media.
-            </p>
-          </div>
+    <main className="flex-1 bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+      <div className="mx-auto max-w-2xl pt-16">
+        <div className="mb-12 text-center">
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-900">
+            Get in Touch
+          </h1>
+          <p className="mx-auto max-w-md text-lg text-slate-600">
+            We&apos;d love to hear from you. Send us an email or follow us on
+            social media.
+          </p>
+        </div>
 
-          <div className="grid gap-6">
-            <CopyEmail />
-            <FollowUs />
-            <QuickResponse />
-          </div>
+        <div className="grid gap-6">
+          <CopyEmail />
+          <FollowUs />
+          <QuickResponse />
         </div>
       </div>
     </main>
