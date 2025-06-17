@@ -390,7 +390,7 @@ export default function OrderForm() {
           return (
             <Button
               type="submit"
-              className="w-full bg-green-600 from-green-600 to-emerald-600 py-3 font-semibold text-white hover:from-green-700 hover:to-emerald-700"
+              className="w-full bg-green-600 from-green-600 to-emerald-600 py-3 font-semibold text-white"
               disabled={!canSubmit || isSubmitting}
             >
               Place Order 🍵
