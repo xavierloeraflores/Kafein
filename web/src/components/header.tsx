@@ -49,7 +49,7 @@ export function Header() {
               className="bg-emerald-600 px-4 hover:bg-emerald-700"
               asChild
             >
-              <Link href="/shop">Buy Now</Link>
+              <Link href="/shop">Order</Link>
             </Button>
           </div>
         </div>
@@ -59,7 +59,7 @@ export function Header() {
             className="bg-emerald-600 px-4 hover:bg-emerald-700"
             asChild
           >
-            <Link href="/shop">Buy Now</Link>
+            <Link href="/shop">Order</Link>
           </Button>
           {/* TODO: Add menu button */}
           {/* <Button variant="ghost" size="sm" className="px-2">
@@ -107,7 +107,7 @@ export function SecondaryHeader() {
               className="bg-emerald-600 px-4 hover:bg-emerald-700"
               asChild
             >
-              <Link href="/shop">Buy Now</Link>
+              <Link href="/shop">Order Now</Link>
             </Button>
           </div>
         </div>
@@ -117,7 +117,7 @@ export function SecondaryHeader() {
             className="bg-emerald-600 px-4 hover:bg-emerald-700"
             asChild
           >
-            <Link href="/shop">Buy Now</Link>
+            <Link href="/shop">Order</Link>
           </Button>
           {/* TODO: Add menu button */}
           {/* <Button variant="ghost" size="sm" className="px-2">

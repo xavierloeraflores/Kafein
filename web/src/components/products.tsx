@@ -79,7 +79,7 @@ function ProductCard({
           className="bg-emerald-600 hover:bg-emerald-700"
           asChild
         >
-          <Link href="/shop">Buy Now</Link>
+          <Link href="/shop">Order</Link>
         </Button>
       </CardFooter>
     </Card>
