@@ -319,9 +319,9 @@ export default function OrderForm() {
                   <SelectValue placeholder="Select a payment method" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="zelle">💳 Zelle</SelectItem>
-                  <SelectItem value="venmo">📱 Venmo</SelectItem>
-                  <SelectItem value="cash">💵 Cash</SelectItem>
+                  <SelectItem value="zelle">Zelle</SelectItem>
+                  <SelectItem value="venmo">Venmo</SelectItem>
+                  <SelectItem value="cash">Cash</SelectItem>
                 </SelectContent>
               </Select>
               <FieldError field={field} />
