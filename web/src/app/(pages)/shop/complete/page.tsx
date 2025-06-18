@@ -3,7 +3,7 @@
 import OrderComplete from "./order-completed";
 import { type orderSchema } from "~/lib/schemas";
 import { type z } from "zod";
-import { Check, Mail, Package, Truck } from "lucide-react";
+import { Check, MapPin, MessageCircle, ChefHat } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import Link from "next/link";
@@ -90,8 +90,8 @@ function OrderCompleteHeader() {
       </div>
       <h1 className="mb-2 text-3xl font-bold text-gray-900">Order Complete!</h1>
       <p className="text-lg text-gray-600">
-        Thank you for your purchase. Your order has been confirmed and will be
-        shipped soon.
+        Thank you for your purchase. Your order has been confirmed and
+        we&apos;ll be in touch soon.
       </p>
     </div>
   );
@@ -107,31 +107,30 @@ function WhatHappensNext() {
         <div className="grid gap-4 md:grid-cols-3">
           <div className="text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-              <Mail className="h-6 w-6 text-blue-600" />
+              <MessageCircle className="h-6 w-6 text-blue-600" />
             </div>
             <h3 className="mb-2 font-medium">Order Confirmation</h3>
             <p className="text-sm text-gray-600">
-              You&apos;ll receive an email confirmation with your order details
+              You&apos;ll receive a text message with your order details
               shortly.
             </p>
           </div>
           <div className="text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100">
-              <Package className="h-6 w-6 text-orange-600" />
+              <ChefHat className="h-6 w-6 text-orange-600" />
             </div>
-            <h3 className="mb-2 font-medium">Order Processing</h3>
+            <h3 className="mb-2 font-medium">Order Preparation</h3>
             <p className="text-sm text-gray-600">
-              We&apos;ll prepare your items for shipment within 1-2 business
-              days.
+              We&apos;ll prepare your order at your requested time.
             </p>
           </div>
           <div className="text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-              <Truck className="h-6 w-6 text-green-600" />
+              <MapPin className="h-6 w-6 text-green-600" />
             </div>
-            <h3 className="mb-2 font-medium">Shipping Updates</h3>
+            <h3 className="mb-2 font-medium">Pickup Order</h3>
             <p className="text-sm text-gray-600">
-              Track your package with the tracking number we&apos;ll send you.
+              Pick up your order and enjoy!
             </p>
           </div>
         </div>
