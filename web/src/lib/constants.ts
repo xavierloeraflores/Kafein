@@ -45,38 +45,93 @@ export const testimonials = [
 
 export const products = [
   {
+    id: "matcha",
     emoji: "🍵",
     title: "Iced Matcha Latte",
-    price: "$6.50",
+    price: 6.5,
     description:
       "Our signature iced drink made with ceremonial grade matcha and your choice of silky milk, served over ice for a smooth, refreshing boost.",
     image: images.matcha,
   },
   {
+    id: "banana",
     emoji: "🍌",
     title: "Banana Cream Matcha Latte",
-    price: "$7.00",
+    price: 7,
     description:
       "A rich and creamy blend of matcha, banana, and vanilla bean, perfectly balanced for a smooth and naturally sweet latte experience.",
     image: images.banana_matcha,
   },
   {
+    id: "blueberry",
     emoji: "🫐",
     title: "Blueberry Matcha Latte",
-    price: "$7.00",
+    price: 7,
     description:
       "A vibrant blend of ceremonial matcha and our house-made organic blueberry jam, crafted to deliver a rich, fruity latte.",
     image: images.strawberry_matcha,
   },
   {
+    id: "strawberry",
     emoji: "🍓",
     title: "Strawberry Matcha Latte",
-    price: "$7.00",
+    price: 7,
     description:
       "A luscious fusion of matcha, real strawberries, and velvety cream, creating a fruity and vibrant twist on the classic latte.",
     image: images.strawberry_matcha,
   },
 ];
+
+export const inventory = {
+  matcha: {
+    id: "matcha",
+    title: "Matcha Latte",
+    price: 7,
+    image: images.matcha,
+  },
+  banana: {
+    id: "banana",
+    title: "Banana Cream Matcha Latte",
+    price: 7,
+    image: images.banana_matcha,
+  },
+  blueberry: {
+    id: "blueberry",
+    title: "Blueberry Matcha Latte",
+    price: 7,
+    image: images.strawberry_matcha,
+  },
+  strawberry: {
+    id: "strawberry",
+    title: "Strawberry Matcha Latte",
+    price: 7,
+    image: images.strawberry_matcha,
+  },
+  "matcha-whole": {
+    id: "matcha-whole",
+    title: "Matcha LatteWhole",
+    price: 7,
+    image: images.matcha,
+  },
+  "banana-whole": {
+    id: "banana-whole",
+    title: "Banana Cream Matcha Latte Whole",
+    price: 7,
+    image: images.banana_matcha,
+  },
+  "blueberry-whole": {
+    id: "blueberry-whole",
+    title: "Blueberry Matcha Latte Whole",
+    price: 7,
+    image: images.strawberry_matcha,
+  },
+  "strawberry-whole": {
+    id: "strawberry-whole",
+    title: "Strawberry Matcha Latte Whole",
+    price: 7,
+    image: images.strawberry_matcha,
+  },
+};
 
 export const socials = {
   instagram: "https://www.instagram.com/kafein.sj",
