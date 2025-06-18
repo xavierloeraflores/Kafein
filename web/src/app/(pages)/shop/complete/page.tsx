@@ -1,3 +1,5 @@
+"use client";
+
 import OrderComplete from "./order-completed";
 import { type orderSchema } from "~/lib/schemas";
 import { type z } from "zod";
@@ -5,44 +7,26 @@ import { Check, Mail, Package, Truck } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import Link from "next/link";
-import { inventory } from "~/lib/constants";
+import { type inventory } from "~/lib/constants";
+import { useSearchParams } from "next/navigation";
 
-export default function OrderCompletePage({
-  params,
-}: {
-  params: {
-    fullName: string;
-    phoneNumber: string;
-    pickupDate: string;
-    pickupTime: string;
-    paymentMethod: string;
-    allergies: string;
-    instagramHandle: string;
-  };
-}) {
-  const {
-    fullName,
-    phoneNumber,
-    pickupDate,
-    pickupTime,
-    paymentMethod,
-    allergies,
-    instagramHandle,
-  } = params;
-  const itemsParams = Object.fromEntries(
-    Object.entries(params).filter(([key]) => key !== "items"),
-  );
-  const items =
-    itemsParams?.items?.split(";").map((entry) => {
-      const [id, quantity] = entry.split(":");
-      return { id, quantity: Number(quantity) };
-    }) ?? [];
-  const validItems = items.filter((item) => {
-    if (!item.id || !item.quantity) return false;
-    const drink = inventory[item.id as keyof typeof inventory];
-    return drink && item.quantity > 0;
-  });
-  const selectedDrinks = validItems.reduce(
+export default function OrderCompletePage() {
+  const params = useSearchParams();
+  const fullName = params.get("fullName");
+  const phoneNumber = params.get("phoneNumber");
+  const pickupDate = params.get("pickupDate");
+  const pickupTime = params.get("pickupTime");
+  const paymentMethod = params.get("paymentMethod");
+  const allergies = params.get("allergies");
+  const instagramHandle = params.get("instagramHandle");
+  const itemsParams = params.get("items");
+
+  let itemsJson: { id: string; quantity: number }[] = [];
+  if (itemsParams) {
+    itemsJson = JSON.parse(itemsParams) as { id: string; quantity: number }[];
+  }
+
+  const selectedDrinks = itemsJson.reduce(
     (acc, item) => {
       acc[item.id as keyof typeof inventory] = item.quantity;
       return acc;
@@ -50,27 +34,22 @@ export default function OrderCompletePage({
     {} as Record<string, number>,
   );
 
-  const order: z.infer<typeof orderSchema> = {
-    fullName,
-    phoneNumber,
-    pickupDate: new Date(pickupDate),
-    pickupTime,
-    paymentMethod,
-    allergies,
-    instagramHandle,
-    selectedDrinks,
-  };
   if (
-    !order.fullName ||
-    !order.phoneNumber ||
-    !order.pickupDate ||
-    !order.pickupTime ||
-    !order.paymentMethod ||
-    !order.allergies ||
-    !order.instagramHandle ||
-    !order.selectedDrinks
+    !fullName ||
+    !phoneNumber ||
+    !pickupDate ||
+    !pickupTime ||
+    !paymentMethod ||
+    !instagramHandle
   ) {
-    console.error("Invalid order", order);
+    console.error("Invalid order", {
+      fullName,
+      phoneNumber,
+      pickupDate,
+      pickupTime,
+      paymentMethod,
+      instagramHandle,
+    });
     return (
       <main className="flex h-screen items-center justify-center">
         <div className="text-center">
@@ -79,6 +58,17 @@ export default function OrderCompletePage({
       </main>
     );
   }
+
+  const order: z.infer<typeof orderSchema> = {
+    fullName,
+    phoneNumber,
+    pickupDate: new Date(pickupDate),
+    pickupTime,
+    paymentMethod,
+    allergies: allergies ?? "",
+    instagramHandle,
+    selectedDrinks: selectedDrinks,
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -91,6 +81,7 @@ export default function OrderCompletePage({
     </div>
   );
 }
+
 function OrderCompleteHeader() {
   return (
     <div className="mb-8 text-center">
