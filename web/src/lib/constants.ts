@@ -84,32 +84,32 @@ export const products = [
 
 export const inventory = {
   matcha: {
-    id: "matcha",
+    id: "matcha-oat",
     title: "Matcha Latte",
     price: 7,
     image: images.matcha,
   },
   banana: {
-    id: "banana",
+    id: "banana-oat",
     title: "Banana Cream Matcha Latte",
     price: 7,
     image: images.banana_matcha,
   },
   blueberry: {
-    id: "blueberry",
+    id: "blueberry-oat",
     title: "Blueberry Matcha Latte",
     price: 7,
     image: images.strawberry_matcha,
   },
   strawberry: {
-    id: "strawberry",
+    id: "strawberry-oat",
     title: "Strawberry Matcha Latte",
     price: 7,
     image: images.strawberry_matcha,
   },
   "matcha-whole": {
     id: "matcha-whole",
-    title: "Matcha LatteWhole",
+    title: "Matcha Latte Whole",
     price: 7,
     image: images.matcha,
   },

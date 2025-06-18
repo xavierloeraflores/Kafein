@@ -29,39 +29,57 @@ import { api } from "~/trpc/react";
 import { orderSchema } from "~/lib/schemas";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { type z } from "zod";
 
 const drinks = [
   {
-    id: "iced-matcha-whole",
+    id: "iced-whole",
     name: "🍵 Iced Matcha Latte - Whole Milk",
     price: "$5.50",
   },
   {
-    id: "banana-matcha-whole",
+    id: "banana-whole",
     name: "🍌 Banana Cream Matcha Latte - Whole Milk",
     price: "$6.00",
   },
   {
-    id: "strawberry-matcha-whole",
+    id: "strawberry-whole",
     name: "🍓 Strawberry & Cream Matcha Latte - Whole Milk",
     price: "$6.00",
   },
   {
-    id: "iced-matcha-oat",
+    id: "iced-oat",
     name: "🍵 Iced Matcha Latte - Oat Milk (Recommended)",
     price: "$5.75",
   },
   {
-    id: "banana-matcha-oat",
+    id: "banana-oat",
     name: "🍌 Banana Cream Matcha Latte - Oat Milk (Recommended)",
     price: "$6.25",
   },
   {
-    id: "strawberry-matcha-oat",
+    id: "strawberry-oat",
     name: "🍓 Strawberry & Cream Matcha Latte - Oat Milk (Recommended)",
     price: "$6.25",
   },
 ];
+
+function generateOrderUrl(order: z.infer<typeof orderSchema>) {
+  const url = new URL("/shop/complete", window.location.origin);
+  url.searchParams.set("fullName", order.fullName);
+  url.searchParams.set("phoneNumber", order.phoneNumber);
+  url.searchParams.set("pickupDate", order.pickupDate.toISOString());
+  url.searchParams.set("pickupTime", order.pickupTime);
+  url.searchParams.set("paymentMethod", order.paymentMethod);
+  url.searchParams.set("allergies", order.allergies);
+  url.searchParams.set("instagramHandle", order.instagramHandle);
+  const items = Object.entries(order.selectedDrinks).map(([id, quantity]) => ({
+    id,
+    quantity,
+  }));
+  url.searchParams.set("items", JSON.stringify(items));
+  return url.toString();
+}
 
 export default function OrderForm() {
   const { mutateAsync: order } = api.order.order.useMutation();
@@ -82,7 +100,8 @@ export default function OrderForm() {
       if (result) {
         toast.success("Order placed successfully");
         setTimeout(() => {
-          router.push("/");
+          const url = generateOrderUrl(form.state.values);
+          router.push(url);
         }, 1000);
       } else {
         toast.error("Failed to place order");
