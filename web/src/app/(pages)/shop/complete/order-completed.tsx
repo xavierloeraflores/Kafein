@@ -103,10 +103,10 @@ function OrderItemsList({ order }: { order: z.infer<typeof orderSchema> }) {
               return <OrderItem key={key} product={product} quantity={value} />;
             }
             return (
-              <>
+              <div key={key}>
                 <Separator />
-                <OrderItem key={key} product={product} quantity={value} />
-              </>
+                <OrderItem product={product} quantity={value} />
+              </div>
             );
           })}
         </div>

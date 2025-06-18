@@ -39,8 +39,7 @@ export default function OrderCompletePage() {
     !phoneNumber ||
     !pickupDate ||
     !pickupTime ||
-    !paymentMethod ||
-    !instagramHandle
+    !paymentMethod
   ) {
     console.error("Invalid order", {
       fullName,
@@ -48,7 +47,8 @@ export default function OrderCompletePage() {
       pickupDate,
       pickupTime,
       paymentMethod,
-      instagramHandle,
+      allergies: allergies ?? "",
+      instagramHandle: instagramHandle ?? "",
     });
     return (
       <main className="flex h-screen items-center justify-center">
@@ -66,8 +66,8 @@ export default function OrderCompletePage() {
     pickupTime,
     paymentMethod,
     allergies: allergies ?? "",
-    instagramHandle,
-    selectedDrinks: selectedDrinks,
+    instagramHandle: instagramHandle ?? "",
+    selectedDrinks,
   };
 
   return (
