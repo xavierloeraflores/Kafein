@@ -52,11 +52,13 @@ export default function OrderCompletePage() {
       instagramHandle: instagramHandle ?? "",
     });
     return (
-      <main className="flex h-screen items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold">Invalid order</h1>
-        </div>
-      </main>
+      <Suspense fallback={<div>Loading...</div>}>
+        <main className="flex h-screen items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold">Invalid order</h1>
+          </div>
+        </main>
+      </Suspense>
     );
   }
 
