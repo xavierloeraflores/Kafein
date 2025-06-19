@@ -9,6 +9,7 @@ import { Button } from "~/components/ui/button";
 import Link from "next/link";
 import { type inventory } from "~/lib/constants";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 export default function OrderCompletePage() {
   const params = useSearchParams();
@@ -71,14 +72,16 @@ export default function OrderCompletePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-        <OrderCompleteHeader />
-        <OrderComplete order={order} />
-        <WhatHappensNext />
-        <ContactSupport />
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="min-h-screen bg-gray-50">
+        <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+          <OrderCompleteHeader />
+          <OrderComplete order={order} />
+          <WhatHappensNext />
+          <ContactSupport />
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 }
 
