@@ -47,7 +47,7 @@ function ProductCard({
 }: {
   emoji: string;
   title: string;
-  price: string;
+  price: number;
   description: string;
   image: string;
 }) {
@@ -73,7 +73,9 @@ function ProductCard({
         <p className="align-text-bottom text-sm text-gray-500">{description}</p>
       </CardContent>
       <CardFooter className="mt-4 flex items-center justify-between">
-        <span className="text-lg font-bold text-emerald-600">{price}</span>
+        <span className="text-lg font-bold text-emerald-600">
+          ${price.toFixed(2)}
+        </span>
         <Button
           size="sm"
           className="bg-emerald-600 hover:bg-emerald-700"
