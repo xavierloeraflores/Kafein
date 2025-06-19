@@ -2,7 +2,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { Button } from "~/components/ui/button";
@@ -16,7 +16,6 @@ import {
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
-import { Checkbox } from "~/components/ui/checkbox";
 import { Calendar } from "~/components/ui/calendar";
 import {
   Popover,
@@ -30,39 +29,23 @@ import { orderSchema } from "~/lib/schemas";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { type z } from "zod";
-
-const drinks = [
-  {
-    id: "iced-whole",
-    name: "🍵 Iced Matcha Latte - Whole Milk",
-    price: "$5.50",
-  },
-  {
-    id: "banana-whole",
-    name: "🍌 Banana Cream Matcha Latte - Whole Milk",
-    price: "$6.00",
-  },
-  {
-    id: "strawberry-whole",
-    name: "🍓 Strawberry & Cream Matcha Latte - Whole Milk",
-    price: "$6.00",
-  },
-  {
-    id: "iced-oat",
-    name: "🍵 Iced Matcha Latte - Oat Milk (Recommended)",
-    price: "$5.75",
-  },
-  {
-    id: "banana-oat",
-    name: "🍌 Banana Cream Matcha Latte - Oat Milk (Recommended)",
-    price: "$6.25",
-  },
-  {
-    id: "strawberry-oat",
-    name: "🍓 Strawberry & Cream Matcha Latte - Oat Milk (Recommended)",
-    price: "$6.25",
-  },
-];
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "~/components/ui/card";
+import Image from "next/image";
+import { products, inventory } from "~/lib/constants";
 
 function generateOrderUrl(order: z.infer<typeof orderSchema>) {
   const url = new URL("/shop/complete", window.location.origin);
@@ -124,7 +107,6 @@ export default function OrderForm() {
       delete newSelection[drinkId];
       setSelectedDrinks(newSelection);
     }
-    form.setFieldValue("selectedDrinks", selectedDrinks);
   };
 
   const handleQuantityChange = (drinkId: string, quantity: number) => {
@@ -136,6 +118,10 @@ export default function OrderForm() {
       setSelectedDrinks(newSelection);
     }
   };
+
+  useEffect(() => {
+    form.setFieldValue("selectedDrinks", selectedDrinks);
+  }, [selectedDrinks]);
 
   return (
     <form
@@ -261,46 +247,14 @@ export default function OrderForm() {
           Select Your Drink(s) *
         </h3>
         <div className="space-y-3">
-          {drinks.map((drink) => (
-            <div key={drink.id} className="space-y-3 rounded-lg border p-4">
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id={drink.id}
-                  checked={drink.id in selectedDrinks}
-                  onCheckedChange={(checked) =>
-                    handleDrinkSelection(drink.id, checked as boolean)
-                  }
-                />
-                <Label htmlFor={drink.id} className="flex-1 cursor-pointer">
-                  {drink.name}{" "}
-                  <span className="font-medium text-green-600">
-                    {drink.price}
-                  </span>
-                </Label>
-              </div>
-
-              {drink.id in selectedDrinks && (
-                <div className="ml-6 flex items-center space-x-2">
-                  <Label htmlFor={`quantity-${drink.id}`} className="text-sm">
-                    Quantity:
-                  </Label>
-                  <Input
-                    id={`quantity-${drink.id}`}
-                    type="number"
-                    min="1"
-                    max="10"
-                    value={selectedDrinks[drink.id]}
-                    onChange={(e) =>
-                      handleQuantityChange(
-                        drink.id,
-                        Number.parseInt(e.target.value) || 0,
-                      )
-                    }
-                    className="w-20"
-                  />
-                </div>
-              )}
-            </div>
+          {products.map((drink) => (
+            <DrinkCard
+              key={drink.id}
+              drink={drink}
+              handleDrinkSelection={handleDrinkSelection}
+              handleQuantityChange={handleQuantityChange}
+              selectedDrinks={selectedDrinks}
+            />
           ))}
         </div>
       </div>
@@ -374,7 +328,7 @@ export default function OrderForm() {
 
       <form.Subscribe
         children={() => {
-          if (Object.keys(form.state.values.selectedDrinks).length > 0)
+          if (Object.keys(selectedDrinks).length > 0)
             return (
               <div className="rounded-lg border border-green-200 bg-green-50 p-4">
                 <h4 className="mb-2 font-semibold text-green-800">
@@ -382,35 +336,61 @@ export default function OrderForm() {
                 </h4>
                 <ul className="space-y-1 text-sm">
                   {Object.entries(selectedDrinks).map(([drinkId, quantity]) => {
-                    const drink = drinks.find((d) => d.id === drinkId);
+                    const drink = Object.values(inventory).find(
+                      (d) => d.id === drinkId,
+                    );
+                    if (!drink) return null;
                     return (
-                      <li key={drinkId} className="flex justify-between">
+                      <li
+                        key={drinkId}
+                        className="flex justify-between text-lg"
+                      >
                         <span>
-                          {drink?.name.split(" - ")[0]} ({quantity})
+                          {drink.emoji} {drink.title} ({quantity})
                         </span>
-                        <span className="text-green-600">
-                          {drink?.name.includes("Oat Milk")
-                            ? "Oat Milk"
-                            : "Whole Milk"}
-                        </span>
+                        <div className="flex flex-row gap-2 text-green-600">
+                          <span>
+                            {drink.id.includes("oat")
+                              ? "Oat Milk"
+                              : "Whole Milk"}{" "}
+                          </span>
+                          <span className="w-20">
+                            | ${(drink.price * quantity).toFixed(2)}
+                          </span>
+                        </div>
                       </li>
                     );
                   })}
                 </ul>
+                <hr className="my-2 border-green-600" />
+                <div className="flex flex-row justify-end gap-2">
+                  <span className="text-lg font-semibold text-green-600">
+                    Total: $
+                    {Object.entries(selectedDrinks)
+                      .reduce((acc, [drinkId, quantity]) => {
+                        const drink = Object.values(inventory).find(
+                          (d) => d.id === drinkId,
+                        );
+                        if (!drink) return acc;
+                        return acc + drink.price * quantity;
+                      }, 0)
+                      .toFixed(2)}
+                  </span>
+                </div>
               </div>
             );
         }}
       />
 
-      {/* Order Summary */}
       <form.Subscribe
         selector={(state) => [state.canSubmit, state.isSubmitting]}
         children={([canSubmit, isSubmitting]) => {
+          const hasSelectedDrinks = Object.keys(selectedDrinks).length > 0;
           return (
             <Button
               type="submit"
               className="w-full bg-green-600 from-green-600 to-emerald-600 py-3 font-semibold text-white"
-              disabled={!canSubmit || isSubmitting}
+              disabled={!canSubmit || !hasSelectedDrinks || isSubmitting}
             >
               Place Order 🍵
               {isSubmitting && (
@@ -436,5 +416,154 @@ function FieldError({ field }: { field: AnyFieldApi }) {
       ) : null}
       {field.state.meta.isValidating ? "Validating..." : null}
     </>
+  );
+}
+
+function DrinkCard({
+  drink,
+  handleDrinkSelection,
+  handleQuantityChange,
+  selectedDrinks,
+}: {
+  drink: (typeof products)[number];
+  handleDrinkSelection: (drinkId: string, checked: boolean) => void;
+  handleQuantityChange: (drinkId: string, quantity: number) => void;
+  selectedDrinks: Record<string, number>;
+}) {
+  const oatId = drink.id.concat("-oat");
+  const wholeId = drink.id.concat("-whole");
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <Card
+      key={drink.id}
+      className="flex flex-col justify-between rounded-lg border bg-white shadow-sm"
+    >
+      <CardHeader className="flex flex-row">
+        <div className="aspect-square w-48 overflow-hidden rounded-md bg-gray-100">
+          <Image
+            src={drink.image}
+            width={500}
+            height={500}
+            alt={drink.title}
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <CardTitle className="flex min-h-16 flex-col gap-2">
+          <span className="text-2xl font-bold">
+            {drink.emoji} {drink.title}
+          </span>
+          <p className="text-sm text-gray-500">{drink.description}</p>
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent className="mt-4 flex items-center justify-between">
+        <span className="text-lg font-bold text-emerald-600">
+          ${drink.price.toFixed(2)}
+        </span>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <Button
+              onClick={() => setIsOpen(true)}
+              className="bg-emerald-600 hover:bg-emerald-700"
+              type="button"
+            >
+              Add to Order
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Add to Order</DialogTitle>
+              <DialogDescription>
+                Select the milk type you would like to add to your order.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex flex-col gap-2">
+              {oatId in selectedDrinks ? (
+                <Button
+                  onClick={() => {
+                    handleDrinkSelection(oatId, false);
+                    setIsOpen(false);
+                  }}
+                >
+                  Remove Oat Milk from Order
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    handleDrinkSelection(oatId, true);
+                    setIsOpen(false);
+                  }}
+                  className="bg-emerald-600 hover:bg-emerald-700"
+                  type="button"
+                >
+                  Add Oat Milk to Order
+                </Button>
+              )}
+              {wholeId in selectedDrinks ? (
+                <Button
+                  onClick={() => {
+                    handleDrinkSelection(wholeId, false);
+                    setIsOpen(false);
+                  }}
+                >
+                  Remove Whole Milk from Order
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    handleDrinkSelection(wholeId, true);
+                    setIsOpen(false);
+                  }}
+                  className="bg-emerald-600 hover:bg-emerald-700"
+                  type="button"
+                >
+                  Add Whole Milk to Order
+                </Button>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
+      </CardContent>
+      <CardFooter className="flex flex-row gap-2">
+        {oatId in selectedDrinks && (
+          <div className="flex flex-row gap-2">
+            <Label htmlFor={oatId}>Oat Milk</Label>
+            <Input
+              id={`quantity-${oatId}`}
+              type="number"
+              min="1"
+              max="10"
+              value={selectedDrinks[oatId]}
+              onChange={(e) =>
+                handleQuantityChange(
+                  oatId,
+                  Number.parseInt(e.target.value) || 0,
+                )
+              }
+              className="w-20"
+            />
+          </div>
+        )}
+        {wholeId in selectedDrinks && (
+          <div className="flex flex-row gap-2">
+            <Label htmlFor={wholeId}>Whole Milk</Label>
+            <Input
+              id={`quantity-${wholeId}`}
+              type="number"
+              min="1"
+              max="10"
+              value={selectedDrinks[wholeId]}
+              onChange={(e) =>
+                handleQuantityChange(
+                  wholeId,
+                  Number.parseInt(e.target.value) || 0,
+                )
+              }
+              className="w-20"
+            />
+          </div>
+        )}
+      </CardFooter>
+    </Card>
   );
 }
