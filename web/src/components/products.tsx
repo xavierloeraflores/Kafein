@@ -54,7 +54,7 @@ function ProductCard({
   return (
     <Card className="flex flex-col justify-between rounded-lg border bg-white shadow-sm">
       <CardHeader>
-        <div className="h-40 w-full overflow-hidden rounded-md bg-gray-100">
+        <div className="flex aspect-square w-full flex-row items-center justify-center overflow-hidden rounded-md">
           <Image
             src={image}
             width={500}
