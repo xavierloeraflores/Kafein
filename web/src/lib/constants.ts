@@ -15,7 +15,7 @@ const logos = {
 
 export const images = {
   logos,
-  hero: "/images/matcha.png",
+  hero: "/images/matcha-emoji.png",
   matcha: "/images/matcha.png",
   banana_matcha: "/images/matcha.png",
   strawberry_matcha: "/images/matcha.png",
