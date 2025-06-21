@@ -22,14 +22,27 @@ function sendOrderEmail(input: z.infer<typeof orderSchema>) {
   return resendClient.emails.send({
     from: "onboarding@resend.dev",
     to: env.RESEND_BUSINESS_EMAIL as string,
-    subject: "New Order",
-    html: `<p>New order from ${input.fullName}</p>
-    <p>Phone: ${input.phoneNumber}</p>
-    <p>Pickup Date: ${input.pickupDate.toLocaleDateString()}</p>
-    <p>Pickup Time: ${input.pickupTime}</p>
-    <p>Payment Method: ${input.paymentMethod}</p>
-    <p>Allergies: ${input.allergies}</p>
-    <p>Instagram Handle: ${input.instagramHandle}</p>
-    <p>Selected Drinks:<br />${selectedDrinks}</p>`,
+    subject: `🍵 New Order Received: ${input.fullName}`,
+    html: `
+    <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f9f9f9; padding: 40px;">
+      <div style="max-width: 600px; margin: auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <h2 style="margin-top: 0; color: #222222;">📦 New Order Received</h2>
+        <p style="margin: 8px 0;"><strong>Name:</strong> ${input.fullName}</p>
+        <p style="margin: 8px 0;"><strong>Phone:</strong> ${input.phoneNumber}</p>
+        <p style="margin: 8px 0;"><strong>Pickup Date:</strong> ${input.pickupDate.toLocaleDateString()}</p>
+        <p style="margin: 8px 0;"><strong>Pickup Time:</strong> ${input.pickupTime}</p>
+        <p style="margin: 8px 0;"><strong>Payment Method:</strong> ${input.paymentMethod}</p>
+        <p style="margin: 8px 0;"><strong>Allergies:</strong> ${input.allergies || "None"}</p>
+        <p style="margin: 8px 0;"><strong>Instagram Handle:</strong> ${input.instagramHandle || "N/A"}</p>
+        <p style="margin: 16px 0 8px;"><strong>Selected Drinks:</strong></p>
+        <div style="padding-left: 20px; margin: 0;">
+          ${selectedDrinks
+            .split("\n")
+            .map((drink) => `<span style="margin-bottom: 4px;">${drink}</span>`)
+            .join("")}
+        </div>
+      </div>
+    </div>
+    `,
   });
 }
