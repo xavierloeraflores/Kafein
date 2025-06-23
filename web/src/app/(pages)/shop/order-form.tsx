@@ -50,6 +50,7 @@ import { products, inventory } from "~/lib/constants";
 function generateOrderUrl(order: z.infer<typeof orderSchema>) {
   const url = new URL("/shop/complete", window.location.origin);
   url.searchParams.set("fullName", order.fullName);
+  url.searchParams.set("email", order.email);
   url.searchParams.set("phoneNumber", order.phoneNumber);
   url.searchParams.set("pickupDate", order.pickupDate.toISOString());
   url.searchParams.set("pickupTime", order.pickupTime);
@@ -71,6 +72,7 @@ export default function OrderForm() {
     defaultValues: {
       fullName: "",
       phoneNumber: "",
+      email: "",
       pickupDate: new Date(),
       pickupTime: "",
       allergies: "",
@@ -148,6 +150,24 @@ export default function OrderForm() {
                   value={field.state.value}
                   onChange={(e) => field.handleChange(e.target.value)}
                   placeholder="Enter your full name"
+                  required
+                />
+                <FieldError field={field} />
+              </div>
+            );
+          }}
+        />
+        <form.Field
+          name="email"
+          children={(field) => {
+            return (
+              <div className="space-y-2">
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  placeholder="Enter your email"
                   required
                 />
                 <FieldError field={field} />

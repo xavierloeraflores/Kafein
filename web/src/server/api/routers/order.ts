@@ -29,6 +29,7 @@ function sendOrderEmail(input: z.infer<typeof orderSchema>) {
       <div style="max-width: 600px; margin: auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
         <h2 style="margin-top: 0; color: #222222;">📦 New Order Received</h2>
         <p style="margin: 8px 0;"><strong>Name:</strong> ${input.fullName}</p>
+        <p style="margin: 8px 0;"><strong>Email:</strong> ${input.email}</p>
         <p style="margin: 8px 0;"><strong>Phone:</strong> ${input.phoneNumber}</p>
         <p style="margin: 8px 0;"><strong>Pickup Date:</strong> ${input.pickupDate.toLocaleDateString()}</p>
         <p style="margin: 8px 0;"><strong>Pickup Time:</strong> ${convertToAmPm(input.pickupTime)}</p>

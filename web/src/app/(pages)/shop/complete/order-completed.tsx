@@ -60,6 +60,10 @@ function OrderSummary({ order }: { order: z.infer<typeof orderSchema> }) {
             <span className="font-medium">{order.fullName}</span>
           </div>
           <div className="flex items-center justify-between">
+            <span className="font-medium">Email:</span>
+            <span className="font-mono text-sm">{order.email}</span>
+          </div>
+          <div className="flex items-center justify-between">
             <span className="font-medium">Phone Number:</span>
             <span className="font-mono text-sm">{order.phoneNumber}</span>
           </div>

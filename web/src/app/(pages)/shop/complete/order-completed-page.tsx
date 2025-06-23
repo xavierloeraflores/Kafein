@@ -21,6 +21,7 @@ export default function OrderCompletePage() {
   const allergies = params.get("allergies");
   const instagramHandle = params.get("instagramHandle");
   const itemsParams = params.get("items");
+  const email = params.get("email");
 
   let itemsJson: { id: string; quantity: number }[] = [];
   if (itemsParams) {
@@ -40,7 +41,8 @@ export default function OrderCompletePage() {
     !phoneNumber ||
     !pickupDate ||
     !pickupTime ||
-    !paymentMethod
+    !paymentMethod ||
+    !email
   ) {
     console.error("Invalid order", {
       fullName,
@@ -50,6 +52,7 @@ export default function OrderCompletePage() {
       paymentMethod,
       allergies: allergies ?? "",
       instagramHandle: instagramHandle ?? "",
+      email,
     });
     return (
       <Suspense fallback={<div>Loading...</div>}>
@@ -71,6 +74,7 @@ export default function OrderCompletePage() {
     allergies: allergies ?? "",
     instagramHandle: instagramHandle ?? "",
     selectedDrinks,
+    email,
   };
 
   return (
