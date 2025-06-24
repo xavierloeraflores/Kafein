@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Toaster } from "~/components/ui/sonner";
+import OpenGraphImage from "./opengraph-image.png";
 
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -11,6 +12,18 @@ export const metadata: Metadata = {
   description:
     "Sip Kafein. Kafein is a Bay Area matcha shop serving thoughtfully crafted, small-batch matcha drinks using premium Japanese green tea. Refresh, recharge, and reconnect—one sip at a time.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  openGraph: {
+    title: "Sip Kafein",
+    description:
+      "Sip Kafein. Kafein is a Bay Area matcha shop serving thoughtfully crafted, small-batch matcha drinks using premium Japanese green tea. Refresh, recharge, and reconnect—one sip at a time.",
+    siteName: "Sip Kafein",
+    url: "https://sipkafein.com",
+    images: [
+      {
+        url: OpenGraphImage.src,
+      },
+    ],
+  },
 };
 
 const geist = Geist({
