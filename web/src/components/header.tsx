@@ -30,12 +30,12 @@ export function Header() {
             >
               Benefits
             </Link>
-            <Link
+            {/* <Link
               href="#testimonials"
               className="transition-colors hover:text-emerald-600"
             >
               Testimonials
-            </Link>
+            </Link> */}
             <Link
               href="#about"
               className="transition-colors hover:text-emerald-600"

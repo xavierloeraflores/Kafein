@@ -25,7 +25,7 @@ export default function Hero() {
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <Button className="bg-emerald-600 hover:bg-emerald-700" asChild>
                 <Link href="/shop">
-                  Shop Now
+                  Order Now
                   <ShoppingBag className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
