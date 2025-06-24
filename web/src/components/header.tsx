@@ -6,7 +6,7 @@ import { images } from "~/lib/constants";
 export function Header() {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40 w-full border-b backdrop-blur">
-      <div className="container mx-auto flex h-20 w-full items-center justify-between space-x-4 sm:space-x-0">
+      <div className="container mx-auto flex h-20 w-full items-center justify-between space-x-4 px-4 sm:space-x-0">
         <Link href="#" className="flex items-center gap-2 text-xl font-bold">
           <span className="sr-only">Kafein</span>
           <Image
