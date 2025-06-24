@@ -17,8 +17,10 @@ export const images = {
   logos,
   hero: "/images/hero.png",
   matcha: "/images/matcha.png",
+  classic: "/images/classic.png",
   banana_matcha: "/images/matcha.png",
-  strawberry_matcha: "/images/matcha.png",
+  strawberry_matcha: "/images/strawberry.png",
+  blueberry_matcha: "/images/blueberry.png",
   about: "/images/about.jpg",
 };
 
@@ -51,7 +53,7 @@ export const products = [
     price: 6.5,
     description:
       "Our signature iced drink made with ceremonial grade matcha and your choice of silky milk, served over ice for a smooth, refreshing boost.",
-    image: images.matcha,
+    image: images.classic,
   },
   {
     id: "banana",
@@ -69,7 +71,7 @@ export const products = [
     price: 7,
     description:
       "A vibrant blend of ceremonial matcha and our house-made organic blueberry jam, crafted to deliver a rich, fruity latte.",
-    image: images.strawberry_matcha,
+    image: images.blueberry_matcha,
   },
   {
     id: "strawberry",
