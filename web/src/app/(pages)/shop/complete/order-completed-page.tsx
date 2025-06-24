@@ -99,8 +99,8 @@ function OrderCompleteHeader() {
       </div>
       <h1 className="mb-2 text-3xl font-bold text-gray-900">Order Complete!</h1>
       <p className="text-lg text-gray-600">
-        Thank you for your purchase. Your order has been confirmed and
-        we&apos;ll be in touch soon.
+        Thank you for your purchase. Your order has been received, we will reach
+        out to you to confirm soon!
       </p>
     </div>
   );
