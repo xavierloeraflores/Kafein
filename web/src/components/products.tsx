@@ -9,10 +9,11 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { SectionContainer } from "./framer-container";
 
 export default function Products() {
   return (
-    <section
+    <SectionContainer
       id="products"
       className="w-full bg-emerald-50 py-12 md:py-24 lg:py-32"
     >
@@ -34,7 +35,7 @@ export default function Products() {
           ))}
         </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 }
 

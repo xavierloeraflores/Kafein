@@ -3,10 +3,11 @@ import { Button } from "~/components/ui/button";
 import { ChevronRight, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { images } from "~/lib/constants";
+import { SectionContainer } from "./framer-container";
 
 export default function Hero() {
   return (
-    <section className="w-full bg-gradient-to-b from-white to-emerald-50 py-12 md:py-24 lg:py-32 xl:py-48">
+    <SectionContainer className="w-full bg-gradient-to-b from-white to-emerald-50 py-12 md:py-24 lg:py-32 xl:py-48">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
           <div className="flex flex-col justify-center space-y-4">
@@ -49,6 +50,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 }

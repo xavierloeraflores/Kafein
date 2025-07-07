@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { images } from "~/lib/constants";
+import { SectionContainer } from "./framer-container";
 
 export default function About() {
   return (
-    <section
+    <SectionContainer
       id="about"
       className="w-full bg-emerald-50 py-12 md:py-24 lg:py-32"
     >
@@ -30,8 +31,11 @@ export default function About() {
               </p>
             </div>
             <div className="space-y-2">
-              <p className="text-gray-500">After experiencing ceremonial-grade matcha in Uji, we couldn&apos;t forget the taste, the ritual, or the feeling it left us with.
-</p>
+              <p className="text-gray-500">
+                After experiencing ceremonial-grade matcha in Uji, we
+                couldn&apos;t forget the taste, the ritual, or the feeling it
+                left us with.
+              </p>
               <p className="text-gray-500">
                 Inspired by that journey, we returned home with a mission: to
                 bring that same authenticity and quality to the Bay Area.
@@ -46,6 +50,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 }
