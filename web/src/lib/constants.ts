@@ -18,7 +18,7 @@ export const images = {
   hero: "/images/hero.png",
   matcha: "/images/matcha.png",
   classic: "/images/classic.png",
-  banana_matcha: "/images/matcha.png",
+  banana_matcha: "/images/banana.png",
   strawberry_matcha: "/images/strawberry.png",
   blueberry_matcha: "/images/blueberry.png",
   about: "/images/about.jpg",
@@ -90,7 +90,7 @@ export const inventory = {
     emoji: "🍵",
     title: "Matcha Latte",
     price: 7,
-    image: images.matcha,
+    image: images.classic,
   },
   "banana-oat": {
     id: "banana-oat",
@@ -118,7 +118,7 @@ export const inventory = {
     emoji: "🍵",
     title: "Matcha Latte Whole",
     price: 7,
-    image: images.matcha,
+    image: images.classic,
   },
   "banana-whole": {
     id: "banana-whole",
