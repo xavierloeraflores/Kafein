@@ -146,5 +146,8 @@ export const inventory = {
 export const socials = {
   instagram: "https://www.instagram.com/kafein.sj",
   instagram_handle: "@kafein.sj",
+  tiktok: "https://www.tiktok.com/@kafein.sj",
+  tiktok_handle: "@kafein.sj",
+  linktree: "https://linktr.ee/kafein.sj",
   email: "sipkafein@gmail.com",
 };
