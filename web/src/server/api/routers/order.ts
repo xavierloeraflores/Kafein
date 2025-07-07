@@ -3,7 +3,6 @@ import { env } from "~/env";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { resendClient } from "~/lib/resendClient";
 import { orderSchema } from "~/lib/schemas";
-import { convertToAmPm } from "~/lib/convertTime";
 
 export const orderRouter = createTRPCRouter({
   order: publicProcedure.input(orderSchema).mutation(async ({ input }) => {
@@ -32,7 +31,7 @@ function sendOrderEmail(input: z.infer<typeof orderSchema>) {
         <p style="margin: 8px 0;"><strong>Email:</strong> ${input.email}</p>
         <p style="margin: 8px 0;"><strong>Phone:</strong> ${input.phoneNumber}</p>
         <p style="margin: 8px 0;"><strong>Pickup Date:</strong> ${input.pickupDate.toLocaleDateString()}</p>
-        <p style="margin: 8px 0;"><strong>Pickup Time:</strong> ${convertToAmPm(input.pickupTime)}</p>
+        <p style="margin: 8px 0;"><strong>Pickup Time:</strong> ${input.pickupTime}</p>
         <p style="margin: 8px 0;"><strong>Payment Method:</strong> ${input.paymentMethod}</p>
         <p style="margin: 8px 0;"><strong>Allergies:</strong> ${input.allergies || "None"}</p>
         <p style="margin: 8px 0;"><strong>Instagram Handle:</strong> ${input.instagramHandle || "N/A"}</p>

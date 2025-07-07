@@ -11,7 +11,6 @@ import { Separator } from "~/components/ui/separator";
 import { type orderSchema } from "~/lib/schemas";
 import { type z } from "zod";
 import { inventory } from "~/lib/constants";
-import { convertToAmPm } from "~/lib/convertTime";
 
 export default function OrderCompletePage({
   order,
@@ -79,7 +78,7 @@ function OrderSummary({ order }: { order: z.infer<typeof orderSchema> }) {
           </div>
           <div className="flex items-center justify-between">
             <span className="font-medium">Pickup Time:</span>
-            <span>{convertToAmPm(order.pickupTime)}</span>
+            <span>{order.pickupTime}</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="font-medium">Status:</span>
