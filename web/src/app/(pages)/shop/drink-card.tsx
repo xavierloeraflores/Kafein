@@ -62,9 +62,14 @@ export function DrinkCard({
       </CardHeader>
 
       <CardContent className="mt-4 flex items-center justify-between">
-        <span className="text-lg font-bold text-emerald-600">
-          ${drink.price.toFixed(2)}
-        </span>
+        <div className="flex flex-col font-mono">
+          <span className="text-lg font-bold text-emerald-600">
+            ${drink.price.toFixed(2)} - 12oz
+          </span>
+          <span className="text-lg font-bold text-emerald-600">
+            ${(drink.price + 1).toFixed(2)} - 16oz
+          </span>
+        </div>
         <AddDrinkDialog
           isOpen={isOpen}
           setIsOpen={setIsOpen}
