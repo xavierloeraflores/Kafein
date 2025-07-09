@@ -571,9 +571,9 @@ function DrinkCard({
           </DialogContent>
         </Dialog>
       </CardContent>
-      <CardFooter className="flex flex-row gap-2">
+      <CardFooter className="flex flex-col items-end gap-2">
         {oatId in selectedDrinks && (
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row justify-end gap-2">
             <Label htmlFor={oatId}>Oat Milk</Label>
             <Input
               id={`quantity-${oatId}`}
