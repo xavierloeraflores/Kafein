@@ -113,13 +113,7 @@ export const inventory = {
     price: 7,
     image: images.strawberry_matcha,
   },
-  "matcha-whole": {
-    id: "matcha-whole",
-    emoji: "🍵",
-    title: "Matcha Latte Whole",
-    price: 7,
-    image: images.classic,
-  },
+
   "banana-whole": {
     id: "banana-whole",
     emoji: "🍌",
@@ -151,3 +145,21 @@ export const socials = {
   linktree: "https://linktr.ee/kafein.sj",
   email: "sipkafein@gmail.com",
 };
+
+export const addons = [
+  {
+    id: "shot",
+    title: "Matcha Shot",
+    price: 1,
+  },
+  {
+    id: "sweet",
+    title: "Extra Sweetness",
+    price: 0,
+  },
+  {
+    id: "large",
+    title: "Large 16oz",
+    price: 1,
+  },
+];
