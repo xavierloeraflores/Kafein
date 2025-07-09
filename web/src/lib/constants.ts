@@ -113,7 +113,13 @@ export const inventory = {
     price: 7,
     image: images.strawberry_matcha,
   },
-
+  "matcha-whole": {
+    id: "matcha-whole",
+    emoji: "🍵",
+    title: "Matcha Latte Whole",
+    price: 7,
+    image: images.classic,
+  },
   "banana-whole": {
     id: "banana-whole",
     emoji: "🍌",
