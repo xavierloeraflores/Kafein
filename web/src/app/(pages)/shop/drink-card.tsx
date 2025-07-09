@@ -65,110 +65,131 @@ export function DrinkCard({
         <span className="text-lg font-bold text-emerald-600">
           ${drink.price.toFixed(2)}
         </span>
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button
-              onClick={() => setIsOpen(true)}
-              className="bg-emerald-600 hover:bg-emerald-700"
-              type="button"
-            >
-              Add to Order
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Add to Order</DialogTitle>
-              <DialogDescription>
-                Select the milk type you would like to add to your order.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex flex-col gap-2">
-              {oatId in selectedDrinks ? (
-                <Button
-                  onClick={() => {
-                    handleDrinkSelection(oatId, false);
-                    setIsOpen(false);
-                  }}
-                >
-                  Remove Oat Milk from Order
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => {
-                    handleDrinkSelection(oatId, true);
-                    setIsOpen(false);
-                  }}
-                  className="bg-emerald-600 hover:bg-emerald-700"
-                  type="button"
-                >
-                  Add Oat Milk to Order
-                </Button>
-              )}
-              {wholeId in selectedDrinks ? (
-                <Button
-                  onClick={() => {
-                    handleDrinkSelection(wholeId, false);
-                    setIsOpen(false);
-                  }}
-                >
-                  Remove Whole Milk from Order
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => {
-                    handleDrinkSelection(wholeId, true);
-                    setIsOpen(false);
-                  }}
-                  className="bg-emerald-600 hover:bg-emerald-700"
-                  type="button"
-                >
-                  Add Whole Milk to Order
-                </Button>
-              )}
-            </div>
-          </DialogContent>
-        </Dialog>
+        <AddDrinkDialog
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          handleDrinkSelection={handleDrinkSelection}
+          oatId={oatId}
+          wholeId={wholeId}
+        />
       </CardContent>
       <CardFooter className="flex flex-col items-end gap-2">
         {oatId in selectedDrinks && (
-          <div className="flex flex-row justify-end gap-2">
-            <Label htmlFor={oatId}>Oat Milk</Label>
-            <Input
-              id={`quantity-${oatId}`}
-              type="number"
-              min="1"
-              max="10"
-              value={selectedDrinks[oatId]}
-              onChange={(e) =>
-                handleQuantityChange(
-                  oatId,
-                  Number.parseInt(e.target.value) || 0,
-                )
-              }
-              className="w-20"
-            />
-          </div>
+          <DrinkQuantity
+            drinkId={oatId}
+            selectedDrinks={selectedDrinks}
+            handleQuantityChange={handleQuantityChange}
+            handleDrinkSelection={handleDrinkSelection}
+            setIsOpen={setIsOpen}
+          />
         )}
         {wholeId in selectedDrinks && (
-          <div className="flex flex-row gap-2">
-            <Label htmlFor={wholeId}>Whole Milk</Label>
-            <Input
-              id={`quantity-${wholeId}`}
-              type="number"
-              min="1"
-              max="10"
-              value={selectedDrinks[wholeId]}
-              onChange={(e) =>
-                handleQuantityChange(
-                  wholeId,
-                  Number.parseInt(e.target.value) || 0,
-                )
-              }
-              className="w-20"
-            />
-          </div>
+          <DrinkQuantity
+            drinkId={wholeId}
+            selectedDrinks={selectedDrinks}
+            handleQuantityChange={handleQuantityChange}
+            handleDrinkSelection={handleDrinkSelection}
+            setIsOpen={setIsOpen}
+          />
         )}
       </CardFooter>
     </Card>
+  );
+}
+function DrinkQuantity({
+  drinkId,
+  selectedDrinks,
+  handleQuantityChange,
+  handleDrinkSelection,
+  setIsOpen,
+}: {
+  drinkId: string;
+  selectedDrinks: Record<string, number>;
+  handleQuantityChange: (drinkId: string, quantity: number) => void;
+  handleDrinkSelection: (drinkId: string, checked: boolean) => void;
+  setIsOpen: (isOpen: boolean) => void;
+}) {
+  return (
+    <div className="flex flex-row gap-2">
+      <Label htmlFor={drinkId}>{drinkId}</Label>
+      <Input
+        id={`quantity-${drinkId}`}
+        type="number"
+        min="1"
+        max="10"
+        value={selectedDrinks[drinkId]}
+        onChange={(e) =>
+          handleQuantityChange(drinkId, Number.parseInt(e.target.value) || 0)
+        }
+        className="w-20"
+      />
+      <Button
+        onClick={() => {
+          handleDrinkSelection(drinkId, false);
+          setIsOpen(false);
+        }}
+      >
+        X
+      </Button>
+    </div>
+  );
+}
+
+function AddDrinkDialog({
+  isOpen,
+  setIsOpen,
+  handleDrinkSelection,
+  oatId,
+  wholeId,
+}: {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  handleDrinkSelection: (drinkId: string, checked: boolean) => void;
+  oatId: string;
+  wholeId: string;
+}) {
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button
+          onClick={() => setIsOpen(true)}
+          className="bg-emerald-600 hover:bg-emerald-700"
+          type="button"
+        >
+          Add to Order
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add to Order</DialogTitle>
+          <DialogDescription>
+            Select the milk type you would like to add to your order.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex flex-col gap-2">
+          <Button
+            onClick={() => {
+              handleDrinkSelection(oatId, true);
+              setIsOpen(false);
+            }}
+            className="bg-emerald-600 hover:bg-emerald-700"
+            type="button"
+          >
+            Add Oat Milk to Order
+          </Button>
+
+          <Button
+            onClick={() => {
+              handleDrinkSelection(wholeId, true);
+              setIsOpen(false);
+            }}
+            className="bg-emerald-600 hover:bg-emerald-700"
+            type="button"
+          >
+            Add Whole Milk to Order
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
