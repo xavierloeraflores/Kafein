@@ -7,14 +7,6 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogTrigger,
-} from "~/components/ui/dialog";
-import {
   Card,
   CardContent,
   CardHeader,
@@ -23,6 +15,7 @@ import {
 } from "~/components/ui/card";
 import Image from "next/image";
 import { type products } from "~/lib/constants";
+import { AddDrinkDialog } from "./add-drink-dialog";
 
 export function DrinkCard({
   drink,
@@ -137,64 +130,5 @@ function DrinkQuantity({
         X
       </Button>
     </div>
-  );
-}
-
-function AddDrinkDialog({
-  isOpen,
-  setIsOpen,
-  handleDrinkSelection,
-  oatId,
-  wholeId,
-}: {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  handleDrinkSelection: (drinkId: string, checked: boolean) => void;
-  oatId: string;
-  wholeId: string;
-}) {
-  return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="bg-emerald-600 hover:bg-emerald-700"
-          type="button"
-        >
-          Add to Order
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add to Order</DialogTitle>
-          <DialogDescription>
-            Select the milk type you would like to add to your order.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="flex flex-col gap-2">
-          <Button
-            onClick={() => {
-              handleDrinkSelection(oatId, true);
-              setIsOpen(false);
-            }}
-            className="bg-emerald-600 hover:bg-emerald-700"
-            type="button"
-          >
-            Add Oat Milk to Order
-          </Button>
-
-          <Button
-            onClick={() => {
-              handleDrinkSelection(wholeId, true);
-              setIsOpen(false);
-            }}
-            className="bg-emerald-600 hover:bg-emerald-700"
-            type="button"
-          >
-            Add Whole Milk to Order
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
   );
 }
