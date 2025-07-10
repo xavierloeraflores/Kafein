@@ -29,7 +29,7 @@ export function getDrinkEmoji(drinkId: string) {
 }
 
 export function getDrinkPrice(drinkId: string) {
-  const { drink, milkType, size, matchaShots } = convertDrinkId(drinkId);
+  const { drink, size, matchaShots } = convertDrinkId(drinkId);
   let drinkPrice = products.find((product) => product.id === drink)?.price;
   if (!drinkPrice) {
     throw new Error("Drink not found");
