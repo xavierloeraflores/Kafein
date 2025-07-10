@@ -28,8 +28,6 @@ export function DrinkCard({
   handleQuantityChange: (drinkId: string, quantity: number) => void;
   selectedDrinks: Record<string, number>;
 }) {
-  const oatId = drink.id.concat("-oat");
-  const wholeId = drink.id.concat("-whole");
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Card
@@ -67,29 +65,23 @@ export function DrinkCard({
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           handleDrinkSelection={handleDrinkSelection}
-          oatId={oatId}
-          wholeId={wholeId}
+          drinkId={drink.id}
         />
       </CardContent>
       <CardFooter className="flex flex-col items-end gap-2">
-        {oatId in selectedDrinks && (
-          <DrinkQuantity
-            drinkId={oatId}
-            selectedDrinks={selectedDrinks}
-            handleQuantityChange={handleQuantityChange}
-            handleDrinkSelection={handleDrinkSelection}
-            setIsOpen={setIsOpen}
-          />
-        )}
-        {wholeId in selectedDrinks && (
-          <DrinkQuantity
-            drinkId={wholeId}
-            selectedDrinks={selectedDrinks}
-            handleQuantityChange={handleQuantityChange}
-            handleDrinkSelection={handleDrinkSelection}
-            setIsOpen={setIsOpen}
-          />
-        )}
+        {selectedDrinks &&
+          Object.keys(selectedDrinks)
+            .filter((curDrink) => curDrink.includes(drink.id))
+            .map((drinkId) => (
+              <DrinkQuantity
+                key={drinkId}
+                drinkId={drinkId}
+                selectedDrinks={selectedDrinks}
+                handleQuantityChange={handleQuantityChange}
+                handleDrinkSelection={handleDrinkSelection}
+                setIsOpen={setIsOpen}
+              />
+            ))}
       </CardFooter>
     </Card>
   );
