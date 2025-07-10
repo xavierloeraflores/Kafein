@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import { type products } from "~/lib/constants";
 import { AddDrinkDialog } from "./add-drink-dialog";
+import { getOrderDrinkName } from "~/lib/convertdrinkId";
 
 export function DrinkCard({
   drink,
@@ -103,7 +104,7 @@ function DrinkQuantity({
 }) {
   return (
     <div className="flex flex-row gap-2">
-      <Label htmlFor={drinkId}>{drinkId}</Label>
+      <Label htmlFor={drinkId}>{getOrderDrinkName(drinkId)}</Label>
       <Input
         id={`quantity-${drinkId}`}
         type="number"
