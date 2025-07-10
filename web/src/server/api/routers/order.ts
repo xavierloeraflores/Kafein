@@ -3,6 +3,7 @@ import { env } from "~/env";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { resendClient } from "~/lib/resendClient";
 import { orderSchema } from "~/lib/schemas";
+import { getDrinkPrice, getOrderDrinkName } from "~/lib/convertdrinkId";
 
 export const orderRouter = createTRPCRouter({
   order: publicProcedure.input(orderSchema).mutation(async ({ input }) => {
@@ -16,8 +17,15 @@ export const orderRouter = createTRPCRouter({
 
 function sendOrderEmail(input: z.infer<typeof orderSchema>) {
   const selectedDrinks = Object.entries(input.selectedDrinks)
-    .map(([drink, quantity]) => `${drink} x ${quantity}`)
+    .map(([drink, quantity]) => `${getOrderDrinkName(drink)} || (${quantity})`)
     .join("<br />");
+  const orderTotal = Object.entries(input.selectedDrinks).reduce(
+    (acc, [drink, quantity]) => {
+      const price = getDrinkPrice(drink);
+      return acc + Number(price) * quantity;
+    },
+    0,
+  );
 
   return resendClient.emails.send({
     from: "onboarding@resend.dev",
@@ -42,6 +50,7 @@ function sendOrderEmail(input: z.infer<typeof orderSchema>) {
             .map((drink) => `<span style="margin-bottom: 4px;">${drink}</span>`)
             .join("")}
         </div>
+        <p style="margin: 8px 0;"><strong>Order Total:</strong> $${orderTotal.toFixed(2)}</p>
       </div>
     </div>
     `,
