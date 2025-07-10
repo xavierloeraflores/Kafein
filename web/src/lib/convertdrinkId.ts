@@ -11,6 +11,15 @@ export function convertDrinkId(drinkId: string) {
   };
 }
 
+export function getDrinkEmoji(drinkId: string) {
+  const { drink } = convertDrinkId(drinkId);
+  const drinkEmoji = products.find((product) => product.id === drink)?.emoji;
+  if (!drinkEmoji) {
+    throw new Error("Drink not found");
+  }
+  return drinkEmoji;
+}
+
 export function getDrinkPrice(drinkId: string) {
   const { drink, milkType, size, matchaShots } = convertDrinkId(drinkId);
   let drinkPrice = products.find((product) => product.id === drink)?.price;
@@ -30,6 +39,15 @@ export function getDrinkPrice(drinkId: string) {
 }
 
 export function getDrinkName(drinkId: string) {
+  const { drink } = convertDrinkId(drinkId);
+  const drinkName = products.find((product) => product.id === drink)?.title;
+  if (!drinkName) {
+    throw new Error("Drink not found");
+  }
+  return drinkName;
+}
+
+export function getFullDrinkName(drinkId: string) {
   const { drink, milkType, sweetness, size, matchaShots } =
     convertDrinkId(drinkId);
   const drinkNameLabel = products.find(
@@ -42,6 +60,20 @@ export function getDrinkName(drinkId: string) {
   const sweetnessLabel = sweetness === "regular" ? "" : "Extra Sweet";
   const sizeLabel = size === "regular" ? "12oz" : "16oz";
   const matchaShotsLabel =
-    matchaShots && Number(matchaShots) > 0 ? `+${matchaShots} Matcha Shot` : "";
+    matchaShots && Number(matchaShots) > 0
+      ? `+${matchaShots} Shot${matchaShots === "1" ? "" : "s"}`
+      : "";
   return `${drinkNameLabel} ${milkTypeLabel} ${sweetnessLabel} ${sizeLabel} ${matchaShotsLabel}`;
+}
+
+export function getOrderDrinkName(drinkId: string) {
+  const drinkName = getFullDrinkName(drinkId);
+  const drinkEmoji = getDrinkEmoji(drinkId);
+
+  if (drinkId.includes("matcha")) {
+    return `${drinkEmoji} ${drinkName.replace("Iced ", "")}`;
+  }
+  const removeString = "Matcha Latte";
+  const shortenedDrinkName = drinkName.replace(removeString, "");
+  return `${drinkEmoji} ${shortenedDrinkName}`;
 }
