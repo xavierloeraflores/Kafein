@@ -10,7 +10,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
 import { type orderSchema } from "~/lib/schemas";
 import { type z } from "zod";
-import { inventory } from "~/lib/constants";
+import {
+  getDrinkImage,
+  getDrinkName,
+  getDrinkPrice,
+  getFullDrinkName,
+} from "~/lib/convertdrinkId";
 
 export default function OrderCompletePage({
   order,
@@ -19,8 +24,8 @@ export default function OrderCompletePage({
 }) {
   const orderTotal = Object.entries(order.selectedDrinks).reduce(
     (acc, [key, value]) => {
-      const product = inventory[key as keyof typeof inventory];
-      return acc + Number(product?.price) * value;
+      const price = getDrinkPrice(key);
+      return acc + Number(price) * value;
     },
     0,
   );
@@ -101,15 +106,15 @@ function OrderItemsList({ order }: { order: z.infer<typeof orderSchema> }) {
       <CardContent>
         <div className="space-y-4">
           {Object.entries(order.selectedDrinks).map(([key, value], index) => {
-            const product = inventory[key as keyof typeof inventory];
-            if (!product) return null;
+            const drinkId = key;
+            if (!drinkId) return null;
             if (index === 0) {
-              return <OrderItem key={key} product={product} quantity={value} />;
+              return <OrderItem key={key} drinkId={drinkId} quantity={value} />;
             }
             return (
               <div key={key}>
                 <Separator />
-                <OrderItem product={product} quantity={value} />
+                <OrderItem drinkId={drinkId} quantity={value} />
               </div>
             );
           })}
@@ -120,28 +125,28 @@ function OrderItemsList({ order }: { order: z.infer<typeof orderSchema> }) {
 }
 
 function OrderItem({
-  product,
+  drinkId,
   quantity,
 }: {
-  product: (typeof inventory)[keyof typeof inventory];
+  drinkId: string;
   quantity: number;
 }) {
-  const price = product.price * quantity;
+  const price = getDrinkPrice(drinkId) * quantity;
   return (
     <div className="flex items-center space-x-4">
       <Image
-        src={product.image}
-        alt={product.title}
+        src={getDrinkImage(drinkId)}
+        alt={getDrinkName(drinkId)}
         width={80}
         height={80}
         className="rounded-lg object-cover"
       />
       <div className="flex-1">
-        <h3 className="font-medium">{product.title}</h3>
+        <h3 className="font-medium">{getFullDrinkName(drinkId)}</h3>
         <p className="text-sm text-gray-600">Qty: {quantity}</p>
       </div>
       <div className="text-right">
-        <p className="font-medium">${price}</p>
+        <p className="font-medium">${price.toFixed(2)}</p>
       </div>
     </div>
   );
@@ -166,7 +171,7 @@ function OrderSidebar({
             <Separator />
             <div className="flex justify-between text-lg font-medium">
               <span>Total</span>
-              <span>${orderTotal}</span>
+              <span>${orderTotal.toFixed(2)}</span>
             </div>
           </div>
         </CardContent>
