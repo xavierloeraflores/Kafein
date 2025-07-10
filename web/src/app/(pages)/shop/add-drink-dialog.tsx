@@ -27,11 +27,15 @@ export function AddDrinkDialog({
   setIsOpen,
   handleDrinkSelection,
   drinkId,
+  selectedDrinks,
+  handleQuantityChange,
 }: {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   handleDrinkSelection: (drinkId: string, checked: boolean) => void;
   drinkId: string;
+  selectedDrinks: Record<string, number>;
+  handleQuantityChange: (drinkId: string, quantity: number) => void;
 }) {
   const [milkType, setMilkType] = useState<"oat" | "whole">("oat");
   const [sweetness, setSweetness] = useState<"regular" | "extra">("regular");
@@ -146,10 +150,15 @@ export function AddDrinkDialog({
           </Button>
           <Button
             onClick={() => {
-              handleDrinkSelection(
-                `${drinkId}-${milkType}-${sweetness}-${size}-${matchaShots}`,
-                true,
-              );
+              const newDrinkId = `${drinkId}-${milkType}-${sweetness}-${size}-${matchaShots}`;
+              if (selectedDrinks[newDrinkId]) {
+                handleQuantityChange(
+                  newDrinkId,
+                  selectedDrinks[newDrinkId] + 1,
+                );
+              } else {
+                handleDrinkSelection(newDrinkId, true);
+              }
               setIsOpen(false);
             }}
             className="flex-1 bg-emerald-600 hover:bg-emerald-700"

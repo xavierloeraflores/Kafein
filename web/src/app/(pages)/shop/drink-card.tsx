@@ -66,6 +66,8 @@ export function DrinkCard({
           setIsOpen={setIsOpen}
           handleDrinkSelection={handleDrinkSelection}
           drinkId={drink.id}
+          selectedDrinks={selectedDrinks}
+          handleQuantityChange={handleQuantityChange}
         />
       </CardContent>
       <CardFooter className="flex flex-col items-end gap-2">
