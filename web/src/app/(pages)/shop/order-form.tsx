@@ -29,8 +29,9 @@ import { orderSchema } from "~/lib/schemas";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { type z } from "zod";
-import { products, inventory } from "~/lib/constants";
+import { products } from "~/lib/constants";
 import { DrinkCard } from "./drink-card";
+import { getDrinkPrice, getOrderDrinkName } from "~/lib/convertdrinkId";
 
 function generateOrderUrl(order: z.infer<typeof orderSchema>) {
   const url = new URL("/shop/complete", window.location.origin);
@@ -368,28 +369,17 @@ export default function OrderForm() {
                 </h4>
                 <ul className="space-y-1 text-sm">
                   {Object.entries(selectedDrinks).map(([drinkId, quantity]) => {
-                    const drink = Object.values(inventory).find(
-                      (d) => d.id === drinkId,
-                    );
-                    if (!drink) return null;
                     return (
                       <li
                         key={drinkId}
                         className="flex justify-between text-lg"
                       >
                         <span>
-                          {drink.emoji} {drink.title} ({quantity})
+                          {getOrderDrinkName(drinkId)} ({quantity})
                         </span>
-                        <div className="flex flex-row gap-2 text-green-600">
-                          <span>
-                            {drink.id.includes("oat")
-                              ? "Oat Milk"
-                              : "Whole Milk"}{" "}
-                          </span>
-                          <span className="w-20">
-                            | ${(drink.price * quantity).toFixed(2)}
-                          </span>
-                        </div>
+                        <span className="w-20 text-green-600">
+                          | ${(getDrinkPrice(drinkId) * quantity).toFixed(2)}
+                        </span>
                       </li>
                     );
                   })}
@@ -400,11 +390,8 @@ export default function OrderForm() {
                     Total: $
                     {Object.entries(selectedDrinks)
                       .reduce((acc, [drinkId, quantity]) => {
-                        const drink = Object.values(inventory).find(
-                          (d) => d.id === drinkId,
-                        );
-                        if (!drink) return acc;
-                        return acc + drink.price * quantity;
+                        const price = getDrinkPrice(drinkId);
+                        return acc + price * quantity;
                       }, 0)
                       .toFixed(2)}
                   </span>
