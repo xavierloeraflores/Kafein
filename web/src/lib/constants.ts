@@ -84,65 +84,6 @@ export const products = [
   },
 ];
 
-export const inventory = {
-  "matcha-oat": {
-    id: "matcha-oat",
-    emoji: "🍵",
-    title: "Matcha Latte",
-    price: 7,
-    image: images.classic,
-  },
-  "banana-oat": {
-    id: "banana-oat",
-    emoji: "🍌",
-    title: "Banana Cream Matcha Latte",
-    price: 7,
-    image: images.banana_matcha,
-  },
-  "blueberry-oat": {
-    id: "blueberry-oat",
-    emoji: "🫐",
-    title: "Blueberry Matcha Latte",
-    price: 7,
-    image: images.strawberry_matcha,
-  },
-  "strawberry-oat": {
-    id: "strawberry-oat",
-    emoji: "🍓",
-    title: "Strawberry Matcha Latte",
-    price: 7,
-    image: images.strawberry_matcha,
-  },
-  "matcha-whole": {
-    id: "matcha-whole",
-    emoji: "🍵",
-    title: "Matcha Latte Whole",
-    price: 7,
-    image: images.classic,
-  },
-  "banana-whole": {
-    id: "banana-whole",
-    emoji: "🍌",
-    title: "Banana Cream Matcha Latte Whole",
-    price: 7,
-    image: images.banana_matcha,
-  },
-  "blueberry-whole": {
-    id: "blueberry-whole",
-    emoji: "🫐",
-    title: "Blueberry Matcha Latte Whole",
-    price: 7,
-    image: images.strawberry_matcha,
-  },
-  "strawberry-whole": {
-    id: "strawberry-whole",
-    emoji: "🍓",
-    title: "Strawberry Matcha Latte Whole",
-    price: 7,
-    image: images.strawberry_matcha,
-  },
-};
-
 export const socials = {
   instagram: "https://www.instagram.com/kafein.sj",
   instagram_handle: "@kafein.sj",
