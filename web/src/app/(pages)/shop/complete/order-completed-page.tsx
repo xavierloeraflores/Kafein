@@ -7,7 +7,6 @@ import { Check, MapPin, MessageCircle, ChefHat } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import Link from "next/link";
-import { type inventory } from "~/lib/constants";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -30,7 +29,7 @@ export default function OrderCompletePage() {
 
   const selectedDrinks = itemsJson.reduce(
     (acc, item) => {
-      acc[item.id as keyof typeof inventory] = item.quantity;
+      acc[item.id] = item.quantity;
       return acc;
     },
     {} as Record<string, number>,
