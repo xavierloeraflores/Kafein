@@ -11,6 +11,14 @@ export function convertDrinkId(drinkId: string) {
   };
 }
 
+export function getDrinkImage(drinkId: string) {
+  const { drink } = convertDrinkId(drinkId);
+  const drinkImage = products.find((product) => product.id === drink)?.image;
+  if (!drinkImage) {
+    throw new Error("Drink not found");
+  }
+  return drinkImage;
+}
 export function getDrinkEmoji(drinkId: string) {
   const { drink } = convertDrinkId(drinkId);
   const drinkEmoji = products.find((product) => product.id === drink)?.emoji;
@@ -31,9 +39,6 @@ export function getDrinkPrice(drinkId: string) {
   }
   if (matchaShots && Number(matchaShots) > 0) {
     drinkPrice += 0.5 * Number(matchaShots);
-  }
-  if (milkType === "whole") {
-    drinkPrice += 1;
   }
   return drinkPrice;
 }
