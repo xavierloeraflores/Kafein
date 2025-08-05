@@ -49,19 +49,19 @@ export const products = [
   {
     id: "matcha",
     emoji: "",
-    title: "Iced Matcha Latte",
+    title: "Matcha Latte",
     price: 6.5,
     description:
-      "Our signature iced drink made with ceremonial grade matcha and your choice of silky milk, served over ice for a smooth, refreshing boost.",
+      "Smooth and earthy Kanbayashi ceremonial-grade matcha, balanced with your choice of milk. Pure, simple, and timeless.",
     image: images.classic,
   },
   {
-    id: "banana",
+    id: "cloudy",
     emoji: "",
-    title: "Banana Cream Matcha Latte",
+    title: "Cloudy Matcha Latte ",
     price: 7,
     description:
-      "A rich and creamy blend of matcha, banana, and vanilla bean, perfectly balanced for a smooth and naturally sweet latte experience.",
+      "A dreamy matcha experience — layered with Kanbayashi matcha, your milk of choice, and crowned with a silky matcha foam cloud.",
     image: images.banana_matcha,
   },
   {
@@ -70,16 +70,16 @@ export const products = [
     title: "Blueberry Matcha Latte",
     price: 7,
     description:
-      "A vibrant blend of ceremonial matcha and our house-made organic blueberry jam, crafted to deliver a rich, fruity latte.",
+      "Our signature matcha meets a vibrant house-made blueberry syrup, layered with your choice of milk for a fruity, energizing twist.",
     image: images.blueberry_matcha,
   },
   {
     id: "strawberry",
     emoji: "",
-    title: "Strawberry Matcha Latte",
+    title: "Strawberries & Cream Matcha Latte ",
     price: 7,
     description:
-      "A luscious fusion of matcha, real strawberries, and velvety cream, creating a fruity and vibrant twist on the classic latte.",
+      "Bright, juicy homemade strawberry syrup swirled with Kanbayashi matcha, topped with a light strawberry cream foam. Sweet, creamy, and refreshing.",
     image: images.strawberry_matcha,
   },
 ];
