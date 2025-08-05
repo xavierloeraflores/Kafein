@@ -19,6 +19,7 @@ export const images = {
   matcha: "/images/matcha.png",
   classic: "/images/classic.png",
   banana_matcha: "/images/banana.png",
+  cloudy_matcha: "/images/cloudy.png",
   strawberry_matcha: "/images/strawberry.png",
   blueberry_matcha: "/images/blueberry.png",
   about: "/images/about.jpg",
@@ -62,7 +63,7 @@ export const products = [
     price: 7,
     description:
       "A dreamy matcha experience — layered with Kanbayashi matcha, your milk of choice, and crowned with a silky matcha foam cloud.",
-    image: images.banana_matcha,
+    image: images.cloudy_matcha,
   },
   {
     id: "blueberry",
