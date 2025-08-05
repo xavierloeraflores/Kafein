@@ -48,7 +48,7 @@ export const testimonials = [
 export const products = [
   {
     id: "matcha",
-    emoji: "🍵",
+    emoji: "",
     title: "Iced Matcha Latte",
     price: 6.5,
     description:
@@ -57,7 +57,7 @@ export const products = [
   },
   {
     id: "banana",
-    emoji: "🍌",
+    emoji: "",
     title: "Banana Cream Matcha Latte",
     price: 7,
     description:
@@ -66,7 +66,7 @@ export const products = [
   },
   {
     id: "blueberry",
-    emoji: "🫐",
+    emoji: "",
     title: "Blueberry Matcha Latte",
     price: 7,
     description:
@@ -75,7 +75,7 @@ export const products = [
   },
   {
     id: "strawberry",
-    emoji: "🍓",
+    emoji: "",
     title: "Strawberry Matcha Latte",
     price: 7,
     description:

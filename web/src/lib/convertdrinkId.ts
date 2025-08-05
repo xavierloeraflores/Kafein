@@ -23,7 +23,7 @@ export function getDrinkEmoji(drinkId: string) {
   const { drink } = convertDrinkId(drinkId);
   const drinkEmoji = products.find((product) => product.id === drink)?.emoji;
   if (!drinkEmoji) {
-    throw new Error("Drink not found");
+    return "";
   }
   return drinkEmoji;
 }
