@@ -34,8 +34,10 @@ export function getDrinkPrice(drinkId: string) {
   if (!drinkPrice) {
     throw new Error("Drink not found");
   }
-  if (size === "large") {
+  if (size === "large" && drink !== "matcha") {
     drinkPrice += 1;
+  } else if (size === "large" && drink === "matcha") {
+    drinkPrice += 0.5;
   }
   if (matchaShots && Number(matchaShots) > 0) {
     drinkPrice += 0.5 * Number(matchaShots);
