@@ -40,6 +40,12 @@ export function AddDrinkDialog({
   const [sweetness, setSweetness] = useState<"regular" | "extra">("regular");
   const [size, setSize] = useState<"regular" | "large">("regular");
   const [matchaShots, setMatchaShots] = useState<number>(0);
+  function resetFormState() {
+    setMilkType("oat");
+    setSweetness("regular");
+    setSize("regular");
+    setMatchaShots(0);
+  }
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -158,6 +164,7 @@ export function AddDrinkDialog({
               } else {
                 handleDrinkSelection(newDrinkId, true);
               }
+              resetFormState();
               setIsOpen(false);
             }}
             className="flex-1 bg-emerald-600 hover:bg-emerald-700"
