@@ -58,7 +58,7 @@ export function DrinkCard({
             ${drink.price.toFixed(2)} - 12oz
           </span>
           <span className="text-lg font-bold text-emerald-600">
-            `$${(drink.price + 0.5).toFixed(2)} - 16oz`
+            {`$${(drink.price + 0.5).toFixed(2)} - 16oz`}
           </span>
         </div>
         <AddDrinkDialog
