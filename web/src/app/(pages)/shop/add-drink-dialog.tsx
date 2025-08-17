@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { addons } from "~/lib/constants";
 
 export function AddDrinkDialog({
   isOpen,
@@ -137,9 +138,15 @@ export function AddDrinkDialog({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="0">0 shots</SelectItem>
-                <SelectItem value="1">1 shot (+$0.50)</SelectItem>
-                <SelectItem value="2">2 shots (+$1.00)</SelectItem>
-                <SelectItem value="3">3 shots (+$1.50)</SelectItem>
+                <SelectItem value="1">
+                  1 shot (+${addons.matchaShot.price.toFixed(2)})
+                </SelectItem>
+                <SelectItem value="2">
+                  2 shots (+${(addons.matchaShot.price * 2).toFixed(2)})
+                </SelectItem>
+                <SelectItem value="3">
+                  3 shots (+${(addons.matchaShot.price * 3).toFixed(2)})
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>

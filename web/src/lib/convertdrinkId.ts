@@ -1,4 +1,4 @@
-import { products } from "./constants";
+import { addons, products } from "./constants";
 
 export function convertDrinkId(drinkId: string) {
   const [drink, milkType, sweetness, size, matchaShots] = drinkId.split("-");
@@ -38,7 +38,8 @@ export function getDrinkPrice(drinkId: string) {
     drinkPrice += 0.5;
   }
   if (matchaShots && Number(matchaShots) > 0) {
-    drinkPrice += 0.5 * Number(matchaShots);
+    const matchaShotPrice = addons.matchaShot.price;
+    drinkPrice += matchaShotPrice * Number(matchaShots);
   }
   return drinkPrice;
 }
