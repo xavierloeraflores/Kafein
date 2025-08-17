@@ -51,7 +51,7 @@ export const products = [
     id: "matcha",
     emoji: "",
     title: "Matcha Latte",
-    price: 7,
+    price: 6.5,
     description:
       "Smooth and earthy Kanbayashi ceremonial-grade matcha, balanced with your choice of milk. Pure, simple, and timeless.",
     image: images.classic,
@@ -60,7 +60,7 @@ export const products = [
     id: "cloudy",
     emoji: "",
     title: "Cloudy Matcha Latte ",
-    price: 7.5,
+    price: 7,
     description:
       "A dreamy matcha experience — layered with Kanbayashi matcha, your milk of choice, and crowned with a silky matcha foam cloud.",
     image: images.cloudy_matcha,
@@ -69,7 +69,7 @@ export const products = [
     id: "blueberry",
     emoji: "",
     title: "Blueberry Matcha Latte",
-    price: 7.5,
+    price: 7,
     description:
       "Our signature matcha meets a vibrant house-made blueberry syrup, layered with your choice of milk for a fruity, energizing twist.",
     image: images.blueberry_matcha,
@@ -78,7 +78,7 @@ export const products = [
     id: "strawberry",
     emoji: "",
     title: "Strawberries & Cream Matcha Latte ",
-    price: 7.5,
+    price: 7,
     description:
       "Bright, juicy homemade strawberry syrup swirled with Kanbayashi matcha, topped with a light strawberry cream foam. Sweet, creamy, and refreshing.",
     image: images.strawberry_matcha,
