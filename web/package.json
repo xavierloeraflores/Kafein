@@ -14,10 +14,11 @@
     "preview": "next build && next start",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "db:generate": "prisma migrate dev --no-engine",
+    "db:generate": "prisma generate",
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
-    "db:studio": "prisma studio --browser none"
+    "db:studio": "prisma studio --browser none",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
