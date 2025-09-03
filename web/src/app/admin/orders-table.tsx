@@ -9,28 +9,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-
-type Order = {
-  id: string;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  allergies: string;
-  pickupDate: Date;
-  pickupTime: string;
-  paymentMethod: string;
-  selectedDrinks: Record<string, number>;
-  status: string;
-  total: string;
-};
+import { type Order } from "@prisma/client/edge";
+import { getDrinkPrice, getOrderDrinkName } from "~/lib/convertdrinkId";
 
 export function OrdersTable({ orders }: { orders: Order[] }) {
-  const formatDrinks = (drinks: Record<string, number>) => {
-    return Object.entries(drinks)
-      .map(([drink, quantity]) => `${drink} (${quantity})`)
-      .join(", ");
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -70,75 +52,83 @@ export function OrdersTable({ orders }: { orders: Order[] }) {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr
-                  key={order.id}
-                  className="border-border hover:bg-muted/50 border-b"
-                >
-                  <td className="px-4 py-4">
-                    <div className="text-card-foreground font-medium">
-                      {order.id}
-                    </div>
-                  </td>
-                  <td className="px-4 py-4">
-                    <div className="text-card-foreground font-medium">
-                      {order.fullName}
-                    </div>
-                    <div className="text-muted-foreground text-sm">
-                      {order.email}
-                    </div>
-                    <div className="text-muted-foreground text-sm">
-                      {order.phoneNumber}
-                    </div>
-                    {order.allergies && (
-                      <div className="text-destructive mt-1 text-xs">
-                        ⚠️ {order.allergies}
-                      </div>
-                    )}
-                  </td>
-                  <td className="px-4 py-4">
-                    <div className="text-card-foreground text-sm">
-                      {order.pickupDate.toLocaleDateString()}
-                    </div>
-                    <div className="text-muted-foreground text-sm">
-                      {order.pickupTime}
-                    </div>
-                  </td>
-                  <td className="px-4 py-4">
-                    <div className="text-card-foreground max-w-48 truncate text-sm">
-                      {formatDrinks(order.selectedDrinks)}
-                    </div>
-                  </td>
-                  <td className="px-4 py-4">
-                    <div className="text-card-foreground text-sm">
-                      {order.paymentMethod}
-                    </div>
-                  </td>
-                  <td className="px-4 py-4">
-                    <div className="text-card-foreground font-medium">
-                      {order.total}
-                    </div>
-                  </td>
-                  <td className="px-4 py-4">
-                    <Badge
-                      className={
-                        statusColors[order.status as keyof typeof statusColors]
-                      }
-                    >
-                      {order.status.charAt(0).toUpperCase() +
-                        order.status.slice(1)}
-                    </Badge>
-                  </td>
-                  <td className="px-4 py-4">
-                    <OrderDropdownMenu orderId={order.id} />
-                  </td>
-                </tr>
+              {orders.map((order, idx) => (
+                <OrderRow order={order} key={idx} />
               ))}
             </tbody>
           </table>
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+function OrderRow({ order }: { order: Order }) {
+  const selectedDrinks = Object.entries(order.selectedDrinks)
+    .map(([selectedDrink]) => {
+      const parsedSelectedDrink = selectedDrink.split("_");
+      const drinkId = parsedSelectedDrink[0] ?? "";
+      const quantity = parseInt(parsedSelectedDrink[1] ?? "0");
+
+      const drink = {
+        drinkId,
+        quantity,
+        drinkName: getOrderDrinkName(drinkId ?? ""),
+      };
+      return drink;
+    })
+    .filter((drink) => drink.drinkId !== "");
+
+  const orderTotal = selectedDrinks.reduce((acc, drink) => {
+    const price = getDrinkPrice(drink.drinkId);
+    return acc + Number(price) * drink.quantity;
+  }, 0);
+
+  return (
+    <tr key={order.id} className="border-border hover:bg-muted/50 border-b">
+      <td className="px-4 py-4">
+        <div className="text-card-foreground font-medium">{order.id}</div>
+      </td>
+      <td className="px-4 py-4">
+        <div className="text-card-foreground font-medium">{order.fullName}</div>
+        <div className="text-muted-foreground text-sm">{order.email}</div>
+        <div className="text-muted-foreground text-sm">{order.phoneNumber}</div>
+        {order.allergies && (
+          <div className="text-destructive mt-1 text-xs">
+            ⚠️ {order.allergies}
+          </div>
+        )}
+      </td>
+      <td className="px-4 py-4">
+        <div className="text-card-foreground text-sm">{order.pickupDate}</div>
+        <div className="text-muted-foreground text-sm">{order.pickupTime}</div>
+      </td>
+      <td className="px-4 py-4">
+        <div className="text-card-foreground max-w-48 truncate text-sm">
+          {selectedDrinks.map((drink) => drink.drinkName).join(", ")}
+        </div>
+      </td>
+      <td className="px-4 py-4">
+        <div className="text-card-foreground text-sm">
+          {order.paymentMethod}
+        </div>
+      </td>
+      <td className="px-4 py-4">
+        <div className="text-card-foreground font-medium">
+          {orderTotal.toFixed(2)}
+        </div>
+      </td>
+      <td className="px-4 py-4">
+        <Badge
+          className={statusColors[order.status as keyof typeof statusColors]}
+        >
+          {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+        </Badge>
+      </td>
+      <td className="px-4 py-4">
+        <OrderDropdownMenu orderId={order.id} />
+      </td>
+    </tr>
   );
 }
 
