@@ -4,9 +4,14 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { resendClient } from "~/lib/resendClient";
 import { orderSchema } from "~/lib/schemas";
 import { getDrinkPrice, getOrderDrinkName } from "~/lib/convertdrinkId";
+import { db } from "~/server/db";
 
 export const orderRouter = createTRPCRouter({
   order: publicProcedure.input(orderSchema).mutation(async ({ input }) => {
+    const order = await saveOrder(input);
+    if (!order) {
+      throw new Error("Failed to save order");
+    }
     const { data, error } = await sendOrderEmail(input);
     if (error) {
       throw new Error("Failed to send order email");
@@ -14,6 +19,29 @@ export const orderRouter = createTRPCRouter({
     return data;
   }),
 });
+
+async function saveOrder(input: z.infer<typeof orderSchema>) {
+  const selectedDrinksArray = Object.entries(input.selectedDrinks).map(
+    ([drink, quantity]) => {
+      return `${drink}_${quantity}`;
+    },
+  );
+  const order = await db.order.create({
+    data: {
+      fullName: input.fullName,
+      email: input.email,
+      phoneNumber: input.phoneNumber,
+      pickupDate: input.pickupDate.toDateString(),
+      pickupTime: input.pickupTime,
+      paymentMethod: input.paymentMethod,
+      allergies: input.allergies,
+      instagramHandle: input.instagramHandle,
+      selectedDrinks: selectedDrinksArray,
+      status: "ordered",
+    },
+  });
+  return order;
+}
 
 function sendOrderEmail(input: z.infer<typeof orderSchema>) {
   const selectedDrinks = Object.entries(input.selectedDrinks)
