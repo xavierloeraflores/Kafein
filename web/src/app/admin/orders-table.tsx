@@ -64,12 +64,13 @@ export function OrdersTable({ orders }: { orders: Order[] }) {
 }
 
 function OrderRow({ order }: { order: Order }) {
-  const selectedDrinks = Object.entries(order.selectedDrinks)
-    .map(([selectedDrink]) => {
+  const selectedDrinks = order.selectedDrinks
+    .map((selectedDrink) => {
       const parsedSelectedDrink = selectedDrink.split("_");
       const drinkId = parsedSelectedDrink[0] ?? "";
       const quantity = parseInt(parsedSelectedDrink[1] ?? "0");
 
+      console.log({ drinkId, quantity, parsedSelectedDrink, selectedDrink });
       const drink = {
         drinkId,
         quantity,
